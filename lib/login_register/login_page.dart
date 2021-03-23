@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'register_page.dart';
 import 'rounded_input_field.dart';
 import 'rounded_password_field.dart';
 
@@ -15,15 +16,16 @@ class LoginPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             RoundedInputField(
-              hintText: 'Your Email',
+              hintText: 'Email',
               onChanged: (value) {},
             ),
             RoundedPasswordField(
+              hintText: 'Password',
               onChanged: (value) {},
             ),
             RaisedButton(
               onPressed: () {
-                print('Pressed');
+                print('Login');
               },
               child: Text('LOGIN'),
             ),
@@ -35,7 +37,14 @@ class LoginPage extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    print('Tapped');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return RegisterPage();
+                        },
+                      ),
+                    );
                   },
                   child: Text(
                     'Sign Up Now!',
