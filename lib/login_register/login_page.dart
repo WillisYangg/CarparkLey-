@@ -1,9 +1,11 @@
+import 'package:carparkley/carpark_info_screen.dart';
 import 'package:flutter/material.dart';
 import 'register_page.dart';
 import 'rounded_input_field.dart';
 import 'rounded_password_field.dart';
 
 class LoginPage extends StatelessWidget {
+  static String id = "login_screen";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +27,8 @@ class LoginPage extends StatelessWidget {
             ),
             RaisedButton(
               onPressed: () {
-                print('Login');
+                print('Login successful!');
+                Navigator.pushNamed(context, CarparkInfo.id);
               },
               child: Text('LOGIN'),
             ),
@@ -37,14 +40,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return RegisterPage();
-                        },
-                      ),
-                    );
+                    Navigator.pushNamed(context, RegisterPage.id);
                   },
                   child: Text(
                     'Sign Up Now!',

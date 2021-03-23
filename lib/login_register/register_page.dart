@@ -4,6 +4,7 @@ import 'rounded_input_field.dart';
 import 'rounded_password_field.dart';
 
 class RegisterPage extends StatelessWidget {
+  static String id = "register_screen";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
