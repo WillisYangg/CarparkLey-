@@ -1,9 +1,11 @@
-import 'package:carparkley/carpark_info_screen.dart';
+//@dart = 2.9
+import 'file:///C:/Users/glenn/AndroidStudioProjects/CarparkLey-/lib/screens/carpark_info_screen.dart';
 import 'package:flutter/material.dart';
-import 'login_register/register_page.dart';
-import 'login_register/login_page.dart';
-import 'home_page.dart';
-import 'settings_screen.dart';
+import 'screens/login_register/register_page.dart';
+import 'screens/login_register/login_page.dart';
+import 'screens/home_page.dart';
+import 'screens/settings_screen.dart';
+import 'services/location.dart';
 
 void main() => runApp(MainPage());
 

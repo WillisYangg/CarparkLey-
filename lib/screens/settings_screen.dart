@@ -41,7 +41,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     height: 15,
                   ),
                   Container(
-                    margin: const EdgeInsets.only(left: 9),
+                    margin: const EdgeInsets.only(left: 2),
                     child: DropdownButton<String>(
                       dropdownColor: Colors.lime,
                       value: vehicleValue,
@@ -97,7 +97,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       fontSize: 25),
                 ),
                 Container(
-                  margin: EdgeInsets.only(left: 60),
+                  margin: EdgeInsets.only(left: 50),
                   child: DropdownButton<String>(
                     dropdownColor: Colors.lime,
                     value: fontValue,
@@ -152,7 +152,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       fontSize: 25),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(left: 50),
+                  margin: const EdgeInsets.only(left: 40),
                   child: DropdownButton<String>(
                     dropdownColor: Colors.lime,
                     value: language,

@@ -1,15 +1,16 @@
-import 'package:carparkley/login_register/login_page.dart';
+import 'file:///C:/Users/glenn/AndroidStudioProjects/CarparkLey-/lib/screens/carpark_info_screen.dart';
 import 'package:flutter/material.dart';
+import 'register_page.dart';
 import 'rounded_input_field.dart';
 import 'rounded_password_field.dart';
 
-class RegisterPage extends StatelessWidget {
-  static String id = "register_screen";
+class LoginPage extends StatelessWidget {
+  static String id = "login_screen";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Register'),
+        title: Text('Login'),
         backgroundColor: Colors.red,
       ),
       body: Center(
@@ -24,35 +25,25 @@ class RegisterPage extends StatelessWidget {
               hintText: 'Password',
               onChanged: (value) {},
             ),
-            RoundedPasswordField(
-              hintText: 'Re-Enter Password',
-              onChanged: (value) {},
-            ),
             RaisedButton(
               onPressed: () {
-                print('Register');
+                print('Login successful!');
+                Navigator.pushNamed(context, CarparkInfo.id);
               },
-              child: Text('REGISTER'),
+              child: Text('LOGIN'),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'Already have and account? ',
+                  'Don\'t have an Account? ',
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return LoginPage();
-                        },
-                      ),
-                    );
+                    Navigator.pushNamed(context, RegisterPage.id);
                   },
                   child: Text(
-                    'Sign In',
+                    'Sign Up Now!',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
