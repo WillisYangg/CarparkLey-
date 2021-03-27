@@ -216,7 +216,7 @@ class _CarparkInfoState extends State<CarparkInfo> {
               ],
             ),
             Container(
-              height: 150,
+              height: 100,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [

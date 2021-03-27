@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
-import 'results.dart';
+import '../results.dart';
+import 'home_page.dart';
+import 'destination_loading_screen.dart';
+import 'package:carparkley/main.dart';
 
 class ResultsPage extends StatefulWidget {
+  ResultsPage({@required this.carparks});
+  final carparks;
   static String id = "results_screen";
 
   @override
@@ -9,28 +14,71 @@ class ResultsPage extends StatefulWidget {
 }
 
 class _ResultsPageState extends State<ResultsPage> {
+  void initState() {
+    super.initState();
+    var carparklist = widget.carparks;
+    print(carparklist);
+  }
   //default distance
+
   String chosenSortType = 'Distance';
 
 // dummy results
-  var results = <Results>[
-    Results(carparkname: 'B', rate: '0.50', vacancy: '2', distance: '100'),
-    Results(carparkname: 'C', rate: '0.75', vacancy: '2', distance: '100'),
-    Results(carparkname: 'A', rate: '0.5', vacancy: '20', distance: '300'),
-    Results(carparkname: 'V', rate: '0.7', vacancy: '12', distance: '120'),
-    Results(carparkname: 'R', rate: '0.5', vacancy: '1', distance: '500'),
-    Results(carparkname: 'A', rate: '0.5', vacancy: '20', distance: '300'),
-    Results(carparkname: 'V', rate: '0.7', vacancy: '12', distance: '120'),
-    Results(carparkname: 'R', rate: '0.5', vacancy: '1', distance: '500'),
-  ];
+
   @override
   Widget build(BuildContext context) {
+    var carparkList = widget.carparks;
+    var results = <Results>[
+      Results(
+          carparkname: carparkList[0],
+          rate: '0.50',
+          vacancy: '2',
+          distance: '100'),
+      Results(
+          carparkname: carparkList[1],
+          rate: '0.75',
+          vacancy: '2',
+          distance: '100'),
+      Results(
+          carparkname: carparkList[2],
+          rate: '0.5',
+          vacancy: '20',
+          distance: '300'),
+      Results(
+          carparkname: carparkList[3],
+          rate: '0.7',
+          vacancy: '12',
+          distance: '120'),
+      Results(
+          carparkname: carparkList[4],
+          rate: '0.5',
+          vacancy: '1',
+          distance: '500'),
+      Results(
+          carparkname: carparkList[5],
+          rate: '0.5',
+          vacancy: '20',
+          distance: '300'),
+      Results(
+          carparkname: carparkList[6],
+          rate: '0.7',
+          vacancy: '12',
+          distance: '120'),
+      Results(
+          carparkname: carparkList[7],
+          rate: '0.5',
+          vacancy: '1',
+          distance: '500'),
+    ];
     return Scaffold(
       appBar: AppBar(
-        title: Text('Car Parks Found'),
-        backgroundColor: Colors.blue[900],
-        centerTitle: true,
-      ),
+          title: Text('Car Parks Found'),
+          backgroundColor: Colors.blue[900],
+          centerTitle: true,
+          leading: IconButton(
+            icon: Icon(Icons.keyboard_return),
+            onPressed: () => Navigator.pushNamed(context, HomePage.id),
+          )),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: SingleChildScrollView(

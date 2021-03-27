@@ -1,11 +1,11 @@
 import 'package:carparkley/screens/login_register/login_page.dart';
-import 'package:carparkley/screens/login_register/register_page.dart';
+import 'package:carparkley/main.dart';
+import 'package:carparkley/screens/results_page.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import '../services/location.dart';
 import '../constants.dart';
 import '../services/find_carparks.dart';
-import 'package:geolocator/geolocator.dart';
+import 'destination_loading_screen.dart';
 
 class HomePage extends StatefulWidget {
   static String id = "home_screen";
@@ -72,21 +72,21 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.only(top: 12.0),
               child: ElevatedButton(
-                  onPressed: () async => print(await FindCarpark().searchNearby(
-                      destinationName,
-                      userLocation.latitude,
-                      userLocation.longitude)),
                   child: Text(
                     'Search Carparks',
                     style: TextStyle(color: Colors.black),
-                  )),
+                  ),
+                  onPressed: () => Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return DestLoadingPage(destination: destinationName);
+                      }))),
             ),
             Card(
               margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 107.0),
               child: RaisedButton(
                 color: Colors.red,
                 onPressed: () {
-                  Navigator.pushNamed(context, RegisterPage.id);
+                  Navigator.pushNamed(context, ResultsPage.id);
                 },
                 child: Row(children: [
                   Icon(

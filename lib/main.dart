@@ -5,7 +5,8 @@ import 'screens/login_register/register_page.dart';
 import 'screens/login_register/login_page.dart';
 import 'screens/home_page.dart';
 import 'screens/settings_screen.dart';
-import 'services/location.dart';
+import 'screens/results_page.dart';
+import 'screens/destination_loading_screen.dart';
 
 void main() => runApp(MainPage());
 
@@ -17,10 +18,13 @@ class MainPage extends StatelessWidget {
       home: HomePage(),
       initialRoute: HomePage.id,
       routes: {
+        HomePage.id: (context) => HomePage(),
         SettingsScreen.id: (context) => SettingsScreen(),
         LoginPage.id: (context) => LoginPage(),
         RegisterPage.id: (context) => RegisterPage(),
         CarparkInfo.id: (context) => CarparkInfo(),
+        ResultsPage.id: (context) => ResultsPage(),
+        DestLoadingPage.id: (context) => DestLoadingPage(),
       },
     );
   }
