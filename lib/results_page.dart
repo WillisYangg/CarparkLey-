@@ -9,7 +9,8 @@ class ResultsPage extends StatefulWidget {
 }
 
 class _ResultsPageState extends State<ResultsPage> {
-  late String chosenSortType;
+  //default distance
+  String chosenSortType = 'Distance';
 
 // dummy results
   var results = <Results>[
@@ -40,10 +41,22 @@ class _ResultsPageState extends State<ResultsPage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.only(top: 10.0),
                     child: Container(
                       height: 30,
-                      margin: EdgeInsets.only(left: 210.0, right: 11.0),
+                      margin: EdgeInsets.only(left: 180.0, right: 1.0),
+                      child: Text(
+                        "Sort By :",
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 10, bottom: 10, right: 5),
+                    child: Container(
+                      height: 30,
+                      margin: EdgeInsets.only(left: 2.0, right: 3.0),
                       decoration: BoxDecoration(
                           border: Border.all(width: 1.5),
                           color: Color(0xE5E5E5),
