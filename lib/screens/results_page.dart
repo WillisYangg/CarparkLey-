@@ -5,7 +5,7 @@ import 'destination_loading_screen.dart';
 import 'package:carparkley/main.dart';
 
 class ResultsPage extends StatefulWidget {
-  ResultsPage({@required this.carparks});
+  ResultsPage({required this.carparks});
   final carparks;
   static String id = "results_screen";
 

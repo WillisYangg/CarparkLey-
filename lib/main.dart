@@ -1,5 +1,5 @@
 //@dart = 2.9
-import 'file:///C:/Users/glenn/AndroidStudioProjects/CarparkLey-/lib/screens/carpark_info_screen.dart';
+import 'screens/carpark_info_screen.dart';
 import 'package:flutter/material.dart';
 import 'screens/login_register/register_page.dart';
 import 'screens/login_register/login_page.dart';

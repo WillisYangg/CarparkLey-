@@ -1,4 +1,4 @@
-import 'file:///C:/Users/glenn/AndroidStudioProjects/CarparkLey-/lib/screens/carpark_info_screen.dart';
+import 'package:carparkley/screens/carpark_info_screen.dart';
 import 'package:flutter/material.dart';
 import 'register_page.dart';
 import 'rounded_input_field.dart';
