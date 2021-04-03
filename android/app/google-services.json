@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "383155510560",
+    "project_id": "carparkle",
+    "storage_bucket": "carparkle.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:383155510560:android:7b9b710106dc9d8a894b45",
+        "android_client_info": {
+          "package_name": "com.willisyang.carparkley"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "383155510560-srckg453ikd6thrlp299mjglp7ku31vh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKMbpEG8oeKJDtcTstQwfIFh3PQ1ZvJQ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "383155510560-srckg453ikd6thrlp299mjglp7ku31vh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

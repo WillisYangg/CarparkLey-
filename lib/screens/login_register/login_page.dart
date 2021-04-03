@@ -1,11 +1,23 @@
 import 'package:carparkley/screens/carpark_info_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '../home_page.dart';
+import '../home_page.dart';
+import 'register_page.dart';
 import 'register_page.dart';
 import 'rounded_input_field.dart';
 import 'rounded_password_field.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   static String id = "login_screen";
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  late String _email, _password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,16 +31,29 @@ class LoginPage extends StatelessWidget {
           children: <Widget>[
             RoundedInputField(
               hintText: 'Email',
-              onChanged: (value) {},
+              onChanged: (value) {
+                _email = value;
+              },
             ),
             RoundedPasswordField(
               hintText: 'Password',
-              onChanged: (value) {},
+              onChanged: (value) {
+                _password = value;
+              },
             ),
-            RaisedButton(
-              onPressed: () {
+            ElevatedButton(
+              onPressed: () async {
+                try {
+                  UserCredential user = await _auth.signInWithEmailAndPassword(
+                      email: _email, password: _password);
+                  if (user != null) {
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => HomePage()));
+                  }
+                } catch (e) {
+                  print(e);
+                }
                 print('Login successful!');
-                Navigator.pushNamed(context, CarparkInfo.id);
               },
               child: Text('LOGIN'),
             ),

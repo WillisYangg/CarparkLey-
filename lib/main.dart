@@ -1,4 +1,5 @@
 //@dart = 2.9
+import 'package:firebase_core/firebase_core.dart';
 import 'screens/carpark_info_screen.dart';
 import 'package:flutter/material.dart';
 import 'screens/login_register/register_page.dart';
@@ -8,7 +9,11 @@ import 'screens/settings_screen.dart';
 import 'screens/results_page.dart';
 import 'screens/destination_loading_screen.dart';
 
-void main() => runApp(MainPage());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MainPage());
+}
 
 class MainPage extends StatelessWidget {
   @override
