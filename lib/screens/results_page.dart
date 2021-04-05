@@ -1,11 +1,17 @@
+import 'package:carparkley/screens/carpark_info_screen.dart';
+import 'package:carparkley/services/get_carpark_rates_details.dart';
 import 'package:flutter/material.dart';
 import '../results.dart';
 import 'home_page.dart';
 import 'destination_loading_screen.dart';
 import 'package:carparkley/main.dart';
+import 'package:carparkley/services/find_carparks.dart';
+import 'package:carparkley/services/get_carpark_info.dart';
+import 'package:carparkley/services/coordinate_converter.dart';
+import 'package:carparkley/services/get_carpark_rates_details.dart';
 
 class ResultsPage extends StatefulWidget {
-  ResultsPage({required this.carparks});
+  ResultsPage({this.carparks});
   final carparks;
   static String id = "results_screen";
 
@@ -17,59 +23,150 @@ class _ResultsPageState extends State<ResultsPage> {
   void initState() {
     super.initState();
     var carparklist = widget.carparks;
-    print(carparklist);
+    print('Carparklist: $carparklist');
+    print("\n\n\n");
+    // getCarparkInfo();
+    // getCoordinates();
   }
   //default distance
 
   String chosenSortType = 'Distance';
+
+  // void getCarparkInfo() async {
+  //   GetCarparkInfo().carparkInformation(destination);
+  // }
+
+  // void getCoordinates() async {
+  //   var coordinates = await CoordinateConverter()
+  //       .convert('28983.788791079794', '33554.5098132845');
+  //   print(coordinates);
+  // }
 
 // dummy results
 
   @override
   Widget build(BuildContext context) {
     var carparkList = widget.carparks;
-    var results = <Results>[
-      Results(
-          carparkname: carparkList[0],
-          rate: '0.50',
-          vacancy: '2',
-          distance: '100'),
-      Results(
-          carparkname: carparkList[1],
-          rate: '0.75',
-          vacancy: '2',
-          distance: '100'),
-      Results(
-          carparkname: carparkList[2],
-          rate: '0.5',
-          vacancy: '20',
-          distance: '300'),
-      Results(
-          carparkname: carparkList[3],
-          rate: '0.7',
-          vacancy: '12',
-          distance: '120'),
-      Results(
-          carparkname: carparkList[4],
-          rate: '0.5',
-          vacancy: '1',
-          distance: '500'),
-      Results(
-          carparkname: carparkList[5],
-          rate: '0.5',
-          vacancy: '20',
-          distance: '300'),
-      Results(
-          carparkname: carparkList[6],
-          rate: '0.7',
-          vacancy: '12',
-          distance: '120'),
-      Results(
-          carparkname: carparkList[7],
-          rate: '0.5',
-          vacancy: '1',
-          distance: '500'),
-    ];
+    print('carpark list in results screen $carparkList');
+    List cpNameList = carparkList.keys.toList();
+    List cpInfoList = carparkList.values.toList();
+    print(cpNameList);
+    print(cpInfoList);
+    print(cpNameList.length);
+
+    dynamic checkHowMany() {
+      if (cpNameList.length == 1) {
+        var results = <Results>[
+          Results(
+              carparkname: cpNameList.toString(),
+              rate: 'click to view',
+              vacancy: cpInfoList.toString(),
+              distance: '-'),
+        ];
+        return results
+            .map((resultsrow) => DataRow(cells: [
+                  DataCell(
+                      Container(
+                          width: 70, //SET width
+                          child: Text(resultsrow.carparkname.toString())),
+                      onTap: () async {
+                    var cpRatesDetails = await GetCarparkRatesDetails()
+                        .carparkRatesDetails(cpNameList.toString());
+                    print("movetonextpage");
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return CarparkInfo(
+                        carparkInformation: cpRatesDetails,
+                        cpName: cpNameList,
+                        cpInfo: cpInfoList,
+                      );
+                    }));
+                  }),
+                  DataCell(Text(resultsrow.rate.toString()), onTap: () async {
+                    var cpRatesDetails = await GetCarparkRatesDetails()
+                        .carparkRatesDetails(cpNameList.toString());
+                    print("movetonextpage");
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return CarparkInfo(
+                        carparkInformation: cpRatesDetails,
+                        cpName: cpNameList,
+                        cpInfo: cpInfoList,
+                      );
+                    }));
+                  }),
+                  DataCell(Text(resultsrow.vacancy.toString()), onTap: () {
+                    print("movetonextpage");
+                    Navigator.pushNamed(context, CarparkInfo.id);
+                  }),
+                  DataCell(Text(resultsrow.distance), onTap: () {
+                    print("movetonextpage");
+                    Navigator.pushNamed(context, CarparkInfo.id);
+                  })
+                ]))
+            .toList();
+      } else {
+        List<Results> results = [];
+        for (int i = 1; i < carparkList.length; i++) {
+          results.add(
+            Results(
+                carparkname: cpNameList[i],
+                rate: 'click to view',
+                vacancy: cpInfoList[i][1],
+                distance: '-'),
+            // Results(carparkname: 'C', rate: '0.5', vacancy: '20', distance: '300'),
+            // Results(carparkname: 'D', rate: '0.7', vacancy: '12', distance: '120'),
+            // Results(carparkname: 'E', rate: '0.5', vacancy: '1', distance: '500'),
+            // Results(carparkname: 'F', rate: '0.5', vacancy: '20', distance: '300'),
+            // Results(carparkname: 'G', rate: '0.7', vacancy: '12', distance: '120'),
+            // Results(carparkname: 'H', rate: '0.5', vacancy: '1', distance: '500'),
+          );
+        }
+        return results
+            .map(
+              (resultsrow) => DataRow(cells: [
+                DataCell(
+                    Container(
+                        width: 70, //SET width
+                        child: Text(resultsrow.carparkname.toString())),
+                    onTap: () async {
+                  var cpRatesDetails = await GetCarparkRatesDetails()
+                      .carparkRatesDetails(cpNameList[0]);
+                  print("movetonextpage");
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return CarparkInfo(
+                      carparkInformation: cpRatesDetails,
+                      cpName: cpNameList[0],
+                      cpInfo: cpInfoList[0],
+                    );
+                  }));
+                }),
+                DataCell(Text(resultsrow.rate), onTap: () async {
+                  var cpRatesDetails = await GetCarparkRatesDetails()
+                      .carparkRatesDetails(cpNameList[1]);
+                  print("movetonextpage");
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return CarparkInfo(
+                      carparkInformation: cpRatesDetails,
+                      cpName: cpNameList[1],
+                      cpInfo: cpInfoList[1],
+                    );
+                  }));
+                }),
+                DataCell(Text(resultsrow.vacancy.toString()), onTap: () {
+                  print("movetonextpage");
+                  Navigator.pushNamed(context, CarparkInfo.id);
+                }),
+                DataCell(Text(resultsrow.distance), onTap: () {
+                  print("movetonextpage");
+                  Navigator.pushNamed(context, CarparkInfo.id);
+                })
+              ]),
+            )
+            .toList();
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
           title: Text('Car Parks Found'),
@@ -77,7 +174,7 @@ class _ResultsPageState extends State<ResultsPage> {
           centerTitle: true,
           leading: IconButton(
             icon: Icon(Icons.keyboard_return),
-            onPressed: () => Navigator.pushNamed(context, HomePage.id),
+            onPressed: () => {Navigator.pushNamed(context, HomePage.id)},
           )),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -161,28 +258,7 @@ class _ResultsPageState extends State<ResultsPage> {
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         tooltip: 'in metres'),
                   ],
-                  rows: results
-                      .map(
-                        (resultsrow) => DataRow(cells: [
-                          DataCell(
-                              Container(
-                                  width: 60, //SET width
-                                  child: Text(resultsrow.carparkname)),
-                              onTap: () {
-                            print("movetonextpage");
-                          }),
-                          DataCell(Text(resultsrow.rate), onTap: () {
-                            print("movetonextpage");
-                          }),
-                          DataCell(Text(resultsrow.vacancy), onTap: () {
-                            print("movetonextpage");
-                          }),
-                          DataCell(Text(resultsrow.distance), onTap: () {
-                            print("movetonextpage");
-                          })
-                        ]),
-                      )
-                      .toList(),
+                  rows: checkHowMany(),
                 ),
               ),
             ],

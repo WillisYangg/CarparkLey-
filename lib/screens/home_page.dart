@@ -3,6 +3,8 @@ import 'package:carparkley/main.dart';
 import 'package:carparkley/screens/results_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_google_places_hoc081098/flutter_google_places_hoc081098.dart';
+import 'package:google_maps_webservice/places.dart';
 import '../services/location.dart';
 import '../constants.dart';
 import '../services/find_carparks.dart';
@@ -64,9 +66,6 @@ class _HomePageState extends State<HomePage> {
       print(userLocation.longitude);
     }
 
-    Location userLocation = Location();
-    getLocation(userLocation);
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -99,8 +98,18 @@ class _HomePageState extends State<HomePage> {
                 child: TextField(
                   style: TextStyle(color: Colors.black),
                   decoration: kTextfieldInputDecoration,
-                  onChanged: (value) {
-                    destinationName = value;
+                  onTap: () async {
+                    final Prediction? p = await PlacesAutocomplete.show(
+                        context: context,
+                        apiKey: googleApiKey,
+                        mode: Mode.overlay, // Mode.fullscreen
+                        language: "en",
+                        components: [new Component(Component.country, "sg")]);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return DestLoadingPage(
+                          destination: p?.description.toString());
+                    }));
                   },
                 ),
               ),
@@ -111,10 +120,10 @@ class _HomePageState extends State<HomePage> {
                       'Search Carparks',
                       style: TextStyle(color: Colors.black),
                     ),
-                    onPressed: () => Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return DestLoadingPage(destination: destinationName);
-                        }))),
+                    onPressed: () => {
+                          if (destinationName == '')
+                            {print('Nothing was entered!')}
+                        }),
               ),
               Card(
                 margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 107.0),

@@ -1,3 +1,4 @@
+import 'package:carparkley/screens/google_maps_directions_screen.dart';
 import 'settings_screen.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -5,6 +6,11 @@ import '../main.dart';
 import 'package:flutter/material.dart';
 
 class CarparkInfo extends StatefulWidget {
+  CarparkInfo({this.carparkInformation, this.cpName, this.cpInfo});
+
+  final carparkInformation;
+  final cpName;
+  final cpInfo;
   static String id = "caparkInfo_screen";
   @override
   _CarparkInfoState createState() => _CarparkInfoState();
@@ -13,6 +19,9 @@ class CarparkInfo extends StatefulWidget {
 class _CarparkInfoState extends State<CarparkInfo> {
   @override
   Widget build(BuildContext context) {
+    List carparkInformation = widget.carparkInformation;
+    List cpInfo = widget.cpInfo;
+    String cpName = widget.cpName.toString();
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -46,16 +55,19 @@ class _CarparkInfoState extends State<CarparkInfo> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(right: 120.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
                   child: Container(
                     child: Center(
-                      child: Text(
-                        'CARPARK A',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Regular',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 28),
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 15, 30, 0),
+                        child: Text(
+                          cpName.toString(),
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Regular',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17),
+                        ),
                       ),
                     ),
                   ),
@@ -76,7 +88,15 @@ class _CarparkInfoState extends State<CarparkInfo> {
                           fontSize: 18),
                     ),
                   ),
-                )
+                ),
+                Text(
+                  cpInfo[0],
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'Regular',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14),
+                ),
               ],
             ),
             Row(
@@ -93,7 +113,15 @@ class _CarparkInfoState extends State<CarparkInfo> {
                           fontSize: 18),
                     ),
                   ),
-                )
+                ),
+                Text(
+                  carparkInformation[2],
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'Regular',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
+                ),
               ],
             ),
             Row(
@@ -110,7 +138,15 @@ class _CarparkInfoState extends State<CarparkInfo> {
                           fontSize: 18),
                     ),
                   ),
-                )
+                ),
+                Text(
+                  carparkInformation[9],
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'Regular',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
+                ),
               ],
             ),
             Row(
@@ -119,7 +155,7 @@ class _CarparkInfoState extends State<CarparkInfo> {
                   padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
                   child: Container(
                     child: Text(
-                      'Empty Lots',
+                      'Empty Lots: ',
                       style: TextStyle(
                           color: Colors.black,
                           fontFamily: 'Regular',
@@ -127,7 +163,15 @@ class _CarparkInfoState extends State<CarparkInfo> {
                           fontSize: 18),
                     ),
                   ),
-                )
+                ),
+                Text(
+                  cpInfo[1],
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'Regular',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
+                ),
               ],
             ),
             Row(
@@ -136,7 +180,7 @@ class _CarparkInfoState extends State<CarparkInfo> {
                   padding: const EdgeInsets.only(left: 30),
                   child: Container(
                     child: Text(
-                      'Rates: ',
+                      'Rates/hr: ',
                       style: TextStyle(
                           color: Colors.black,
                           fontFamily: 'Regular',
@@ -144,7 +188,35 @@ class _CarparkInfoState extends State<CarparkInfo> {
                           fontSize: 18),
                     ),
                   ),
-                )
+                ),
+                Column(
+                  children: [
+                    Text(
+                      'Weekday rates' + ' ' + carparkInformation[1],
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Regular',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 18),
+                    ),
+                    Text(
+                      'Saturday rates' + ' ' + carparkInformation[4],
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Regular',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 18),
+                    ),
+                    Text(
+                      'Sunday&PH rates' + ' ' + carparkInformation[6],
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Regular',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 18),
+                    ),
+                  ],
+                ),
               ],
             ),
             Row(
@@ -153,7 +225,7 @@ class _CarparkInfoState extends State<CarparkInfo> {
                   padding: const EdgeInsets.only(left: 30),
                   child: Container(
                     child: Text(
-                      'Weekdays: ',
+                      'Duration: ',
                       style: TextStyle(
                           color: Colors.black,
                           fontFamily: 'Regular',
@@ -161,58 +233,76 @@ class _CarparkInfoState extends State<CarparkInfo> {
                           fontSize: 18),
                     ),
                   ),
-                )
+                ),
+                Column(
+                  children: [
+                    Text(
+                      'Weekday minimum: ' + carparkInformation[0],
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Regular',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 18),
+                    ),
+                    Text(
+                      'Saturday minimum: ' + carparkInformation[3],
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Regular',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 18),
+                    ),
+                    Text(
+                      'Sunday&PH minimum: ' + carparkInformation[5],
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Regular',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 18),
+                    ),
+                  ],
+                ),
               ],
             ),
             Row(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 30),
-                  child: Container(
-                    child: Text(
-                      'Saturday: ',
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30),
+                      child: Container(
+                        child: Text(
+                          'Timings: ',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Regular',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 18),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Column(
+                  children: [
+                    Text(
+                      'Start time: ' + carparkInformation[7],
                       style: TextStyle(
                           color: Colors.black,
                           fontFamily: 'Regular',
                           fontWeight: FontWeight.w500,
                           fontSize: 18),
                     ),
-                  ),
-                )
-              ],
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 30),
-                  child: Container(
-                    child: Text(
-                      'Sunday: ',
+                    Text(
+                      'End time: ' + carparkInformation[8],
                       style: TextStyle(
                           color: Colors.black,
                           fontFamily: 'Regular',
                           fontWeight: FontWeight.w500,
                           fontSize: 18),
                     ),
-                  ),
-                )
-              ],
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 30),
-                  child: Container(
-                    child: Text(
-                      'Public Holidays: ',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'Regular',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18),
-                    ),
-                  ),
-                )
+                  ],
+                ),
               ],
             ),
             Container(
@@ -251,7 +341,7 @@ class _CarparkInfoState extends State<CarparkInfo> {
     return FlatButton(
       color: Colors.deepPurpleAccent,
       onPressed: () {
-        Navigator.pushNamed(context, SettingsScreen.id);
+        Navigator.pushNamed(context, GoogleMapsPage.id);
       },
       child: Container(
         height: 30,
