@@ -50,17 +50,18 @@ class _ResultsPageState extends State<ResultsPage> {
     print('carpark list in results screen $carparkList');
     List cpNameList = carparkList.keys.toList();
     List cpInfoList = carparkList.values.toList();
-    print(cpNameList);
-    print(cpInfoList);
+    print('cpNameList is $cpNameList');
+    print('cpInfoList is $cpInfoList');
     print(cpNameList.length);
 
     dynamic checkHowMany() {
       if (cpNameList.length == 1) {
         var results = <Results>[
           Results(
-              carparkname: cpNameList.toString(),
+              carparkname: cpNameList[0],
               rate: 'click to view',
-              vacancy: cpInfoList.toString(),
+              infoList: cpInfoList[0],
+              vacancy: cpInfoList[0][1],
               distance: '-'),
         ];
         return results
@@ -69,49 +70,34 @@ class _ResultsPageState extends State<ResultsPage> {
                       Container(
                           width: 70, //SET width
                           child: Text(resultsrow.carparkname.toString())),
-                      onTap: () async {
-                    var cpRatesDetails = await GetCarparkRatesDetails()
-                        .carparkRatesDetails(cpNameList.toString());
-                    print("movetonextpage");
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return CarparkInfo(
-                        carparkInformation: cpRatesDetails,
-                        cpName: cpNameList,
-                        cpInfo: cpInfoList,
-                      );
-                    }));
-                  }),
+                      onTap: () {}),
                   DataCell(Text(resultsrow.rate.toString()), onTap: () async {
+                    print("finding detailed rates for : " +
+                        resultsrow.carparkname);
                     var cpRatesDetails = await GetCarparkRatesDetails()
-                        .carparkRatesDetails(cpNameList.toString());
-                    print("movetonextpage");
+                        .carparkRatesDetails(resultsrow.carparkname);
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
                       return CarparkInfo(
                         carparkInformation: cpRatesDetails,
-                        cpName: cpNameList,
-                        cpInfo: cpInfoList,
+                        cpName: resultsrow.carparkname,
+                        cpInfo: resultsrow.infoList,
                       );
                     }));
                   }),
-                  DataCell(Text(resultsrow.vacancy.toString()), onTap: () {
-                    print("movetonextpage");
-                    Navigator.pushNamed(context, CarparkInfo.id);
-                  }),
-                  DataCell(Text(resultsrow.distance), onTap: () {
-                    print("movetonextpage");
-                    Navigator.pushNamed(context, CarparkInfo.id);
-                  })
+                  DataCell(Text(resultsrow.vacancy.toString()), onTap: () {}),
+                  DataCell(Text(resultsrow.distance), onTap: () {})
                 ]))
             .toList();
       } else {
         List<Results> results = [];
-        for (int i = 1; i < carparkList.length; i++) {
+        int counter = 0;
+        for (int i = 0; i < carparkList.length; i++) {
           results.add(
             Results(
                 carparkname: cpNameList[i],
                 rate: 'click to view',
+                infoList: cpInfoList[i],
                 vacancy: cpInfoList[i][1],
                 distance: '-'),
             // Results(carparkname: 'C', rate: '0.5', vacancy: '20', distance: '300'),
@@ -129,38 +115,26 @@ class _ResultsPageState extends State<ResultsPage> {
                     Container(
                         width: 70, //SET width
                         child: Text(resultsrow.carparkname.toString())),
-                    onTap: () async {
-                  var cpRatesDetails = await GetCarparkRatesDetails()
-                      .carparkRatesDetails(cpNameList[0]);
-                  print("movetonextpage");
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return CarparkInfo(
-                      carparkInformation: cpRatesDetails,
-                      cpName: cpNameList[0],
-                      cpInfo: cpInfoList[0],
-                    );
-                  }));
-                }),
+                    onTap: () {}),
                 DataCell(Text(resultsrow.rate), onTap: () async {
+                  print(
+                      "finding detailed rates for : " + resultsrow.carparkname);
                   var cpRatesDetails = await GetCarparkRatesDetails()
-                      .carparkRatesDetails(cpNameList[1]);
-                  print("movetonextpage");
+                      .carparkRatesDetails(resultsrow.carparkname);
+                  print("Displaying page for: " +
+                      resultsrow.carparkname.toString() +
+                      " with cpInfo: " +
+                      resultsrow.infoList.toString());
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return CarparkInfo(
                       carparkInformation: cpRatesDetails,
-                      cpName: cpNameList[1],
-                      cpInfo: cpInfoList[1],
+                      cpName: resultsrow.carparkname,
+                      cpInfo: resultsrow.infoList,
                     );
                   }));
                 }),
-                DataCell(Text(resultsrow.vacancy.toString()), onTap: () {
-                  print("movetonextpage");
-                  Navigator.pushNamed(context, CarparkInfo.id);
-                }),
-                DataCell(Text(resultsrow.distance), onTap: () {
-                  print("movetonextpage");
-                  Navigator.pushNamed(context, CarparkInfo.id);
-                })
+                DataCell(Text(resultsrow.vacancy.toString()), onTap: () {}),
+                DataCell(Text(resultsrow.distance), onTap: () {})
               ]),
             )
             .toList();

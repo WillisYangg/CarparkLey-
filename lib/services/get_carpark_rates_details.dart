@@ -58,6 +58,7 @@ class GetCarparkRatesDetails {
         cpRatesDetails.add(startTime);
         cpRatesDetails.add(endTime);
         cpRatesDetails.add(parkCapacity);
+        print("cpRatesDetails is: $cpRatesDetails");
         return cpRatesDetails;
       }
     }

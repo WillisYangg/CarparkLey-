@@ -20,8 +20,11 @@ class _CarparkInfoState extends State<CarparkInfo> {
   @override
   Widget build(BuildContext context) {
     List carparkInformation = widget.carparkInformation;
+    print('carparkInformation: $carparkInformation');
     List cpInfo = widget.cpInfo;
+    print('cpInfo: $cpInfo');
     String cpName = widget.cpName.toString();
+    print('cpName: $cpName');
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -90,7 +93,7 @@ class _CarparkInfoState extends State<CarparkInfo> {
                   ),
                 ),
                 Text(
-                  cpInfo[0],
+                  cpInfo[0].toString(),
                   style: TextStyle(
                       color: Colors.black,
                       fontFamily: 'Regular',
@@ -115,7 +118,7 @@ class _CarparkInfoState extends State<CarparkInfo> {
                   ),
                 ),
                 Text(
-                  carparkInformation[2],
+                  carparkInformation[2].toString(),
                   style: TextStyle(
                       color: Colors.black,
                       fontFamily: 'Regular',
@@ -140,7 +143,7 @@ class _CarparkInfoState extends State<CarparkInfo> {
                   ),
                 ),
                 Text(
-                  carparkInformation[9],
+                  carparkInformation[9].toString(),
                   style: TextStyle(
                       color: Colors.black,
                       fontFamily: 'Regular',
@@ -165,7 +168,7 @@ class _CarparkInfoState extends State<CarparkInfo> {
                   ),
                 ),
                 Text(
-                  cpInfo[1],
+                  cpInfo[1].toString(),
                   style: TextStyle(
                       color: Colors.black,
                       fontFamily: 'Regular',
@@ -192,7 +195,7 @@ class _CarparkInfoState extends State<CarparkInfo> {
                 Column(
                   children: [
                     Text(
-                      'Weekday rates' + ' ' + carparkInformation[1],
+                      'Weekday rates' + ' ' + carparkInformation[1].toString(),
                       style: TextStyle(
                           color: Colors.black,
                           fontFamily: 'Regular',
@@ -200,7 +203,7 @@ class _CarparkInfoState extends State<CarparkInfo> {
                           fontSize: 18),
                     ),
                     Text(
-                      'Saturday rates' + ' ' + carparkInformation[4],
+                      'Saturday rates' + ' ' + carparkInformation[4].toString(),
                       style: TextStyle(
                           color: Colors.black,
                           fontFamily: 'Regular',
@@ -208,7 +211,9 @@ class _CarparkInfoState extends State<CarparkInfo> {
                           fontSize: 18),
                     ),
                     Text(
-                      'Sunday&PH rates' + ' ' + carparkInformation[6],
+                      'Sunday&PH rates' +
+                          ' ' +
+                          carparkInformation[6].toString(),
                       style: TextStyle(
                           color: Colors.black,
                           fontFamily: 'Regular',
@@ -237,7 +242,7 @@ class _CarparkInfoState extends State<CarparkInfo> {
                 Column(
                   children: [
                     Text(
-                      'Weekday minimum: ' + carparkInformation[0],
+                      'Weekday minimum: ' + carparkInformation[0].toString(),
                       style: TextStyle(
                           color: Colors.black,
                           fontFamily: 'Regular',
@@ -245,7 +250,7 @@ class _CarparkInfoState extends State<CarparkInfo> {
                           fontSize: 18),
                     ),
                     Text(
-                      'Saturday minimum: ' + carparkInformation[3],
+                      'Saturday minimum: ' + carparkInformation[3].toString(),
                       style: TextStyle(
                           color: Colors.black,
                           fontFamily: 'Regular',
@@ -253,7 +258,7 @@ class _CarparkInfoState extends State<CarparkInfo> {
                           fontSize: 18),
                     ),
                     Text(
-                      'Sunday&PH minimum: ' + carparkInformation[5],
+                      'Sunday&PH minimum: ' + carparkInformation[5].toString(),
                       style: TextStyle(
                           color: Colors.black,
                           fontFamily: 'Regular',
@@ -286,7 +291,7 @@ class _CarparkInfoState extends State<CarparkInfo> {
                 Column(
                   children: [
                     Text(
-                      'Start time: ' + carparkInformation[7],
+                      'Start time: ' + carparkInformation[7].toString(),
                       style: TextStyle(
                           color: Colors.black,
                           fontFamily: 'Regular',
@@ -294,7 +299,7 @@ class _CarparkInfoState extends State<CarparkInfo> {
                           fontSize: 18),
                     ),
                     Text(
-                      'End time: ' + carparkInformation[8],
+                      'End time: ' + carparkInformation[8].toString(),
                       style: TextStyle(
                           color: Colors.black,
                           fontFamily: 'Regular',
