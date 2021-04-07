@@ -1,7 +1,7 @@
 import 'package:carparkley/screens/google_maps_directions_screen.dart';
 import 'settings_screen.dart';
 import 'package:flutter/cupertino.dart';
-
+import 'package:share/share.dart';
 import '../main.dart';
 import 'package:flutter/material.dart';
 
@@ -315,49 +315,78 @@ class _CarparkInfoState extends State<CarparkInfo> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _userOptions(
-                      Icon(
-                        Icons.star,
-                        color: Colors.yellow,
+                  FlatButton(
+                    color: Colors.deepPurpleAccent,
+                    onPressed: () {},
+                    child: Container(
+                      height: 30,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.star,
+                            color: Colors.yellow,
+                          ),
+                          Text(
+                            'Save',
+                            style: TextStyle(
+                                fontFamily: 'Regular',
+                                color: Colors.white,
+                                fontSize: 20),
+                          ),
+                        ],
                       ),
-                      'Save'),
-                  _userOptions(
-                      Icon(
-                        Icons.share,
-                        color: Colors.deepOrange,
+                    ),
+                  ),
+                  FlatButton(
+                    color: Colors.deepPurpleAccent,
+                    onPressed: () {
+                      Share.share(
+                          'Hey! Check out this $cpName and all its real time info below: \ncarparkInformation');
+                    },
+                    child: Container(
+                      height: 30,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.share,
+                            color: Colors.deepOrange,
+                          ),
+                          Text(
+                            'Share',
+                            style: TextStyle(
+                                fontFamily: 'Regular',
+                                color: Colors.white,
+                                fontSize: 20),
+                          ),
+                        ],
                       ),
-                      'Share'),
-                  _userOptions(
-                      Icon(
-                        Icons.navigation_outlined,
-                        color: Colors.lightBlue,
+                    ),
+                  ),
+                  FlatButton(
+                    color: Colors.deepPurpleAccent,
+                    onPressed: () {},
+                    child: Container(
+                      height: 30,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.navigation_outlined,
+                            color: Colors.lightBlue,
+                          ),
+                          Text(
+                            'Navigate',
+                            style: TextStyle(
+                                fontFamily: 'Regular',
+                                color: Colors.white,
+                                fontSize: 20),
+                          ),
+                        ],
                       ),
-                      'Navigate'),
+                    ),
+                  )
                 ],
               ),
             )
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _userOptions(Icon icon, String option) {
-    return FlatButton(
-      color: Colors.deepPurpleAccent,
-      onPressed: () {
-        Navigator.pushNamed(context, GoogleMapsPage.id);
-      },
-      child: Container(
-        height: 30,
-        child: Row(
-          children: [
-            icon,
-            Text(
-              option,
-              style: TextStyle(
-                  fontFamily: 'Regular', color: Colors.white, fontSize: 20),
-            ),
           ],
         ),
       ),
