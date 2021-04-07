@@ -62,20 +62,25 @@ class _ResultsPageState extends State<ResultsPage> {
               rate: 'click to view',
               infoList: cpInfoList[0],
               vacancy: cpInfoList[0][1],
-              distance: '-'),
+              distance: '-',
+              lotType: 'C'),
         ];
         return results
             .map((resultsrow) => DataRow(cells: [
                   DataCell(
                       Container(
-                          width: 70, //SET width
+                          width: 60, //SET width
                           child: Text(resultsrow.carparkname.toString())),
                       onTap: () {}),
-                  DataCell(Text(resultsrow.rate.toString()), onTap: () async {
+                  DataCell(
+                      Container(
+                          width: 45, child: Text(resultsrow.rate.toString())),
+                      onTap: () async {
                     print("finding detailed rates for : " +
                         resultsrow.carparkname);
                     var cpRatesDetails = await GetCarparkRatesDetails()
-                        .carparkRatesDetails(resultsrow.carparkname);
+                        .carparkRatesDetails(
+                            resultsrow.carparkname, resultsrow.lotType);
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
                       return CarparkInfo(
@@ -86,6 +91,7 @@ class _ResultsPageState extends State<ResultsPage> {
                     }));
                   }),
                   DataCell(Text(resultsrow.vacancy.toString()), onTap: () {}),
+                  DataCell(Text(resultsrow.lotType.toString()), onTap: () {}),
                   DataCell(Text(resultsrow.distance), onTap: () {})
                 ]))
             .toList();
@@ -99,7 +105,8 @@ class _ResultsPageState extends State<ResultsPage> {
                 rate: 'click to view',
                 infoList: cpInfoList[i],
                 vacancy: cpInfoList[i][1],
-                distance: '-'),
+                distance: '-',
+                lotType: 'C'),
             // Results(carparkname: 'C', rate: '0.5', vacancy: '20', distance: '300'),
             // Results(carparkname: 'D', rate: '0.7', vacancy: '12', distance: '120'),
             // Results(carparkname: 'E', rate: '0.5', vacancy: '1', distance: '500'),
@@ -113,14 +120,16 @@ class _ResultsPageState extends State<ResultsPage> {
               (resultsrow) => DataRow(cells: [
                 DataCell(
                     Container(
-                        width: 70, //SET width
+                        width: 60, //SET width
                         child: Text(resultsrow.carparkname.toString())),
                     onTap: () {}),
-                DataCell(Text(resultsrow.rate), onTap: () async {
+                DataCell(Container(width: 45, child: Text(resultsrow.rate)),
+                    onTap: () async {
                   print(
                       "finding detailed rates for : " + resultsrow.carparkname);
                   var cpRatesDetails = await GetCarparkRatesDetails()
-                      .carparkRatesDetails(resultsrow.carparkname);
+                      .carparkRatesDetails(
+                          resultsrow.carparkname, resultsrow.lotType);
                   print("Displaying page for: " +
                       resultsrow.carparkname.toString() +
                       " with cpInfo: " +
@@ -134,6 +143,7 @@ class _ResultsPageState extends State<ResultsPage> {
                   }));
                 }),
                 DataCell(Text(resultsrow.vacancy.toString()), onTap: () {}),
+                DataCell(Text(resultsrow.lotType.toString()), onTap: () {}),
                 DataCell(Text(resultsrow.distance), onTap: () {})
               ]),
             )
@@ -215,7 +225,7 @@ class _ResultsPageState extends State<ResultsPage> {
                 color: Colors.grey[100],
                 child: DataTable(
                   dividerThickness: 2,
-                  columnSpacing: 40,
+                  columnSpacing: 15,
                   dataRowHeight: 100,
                   columns: const <DataColumn>[
                     DataColumn(
@@ -226,6 +236,9 @@ class _ResultsPageState extends State<ResultsPage> {
                             style: TextStyle(fontWeight: FontWeight.bold))),
                     DataColumn(
                         label: Text('Vacancy',
+                            style: TextStyle(fontWeight: FontWeight.bold))),
+                    DataColumn(
+                        label: Text('Lot Type',
                             style: TextStyle(fontWeight: FontWeight.bold))),
                     DataColumn(
                         label: Text('Distance',

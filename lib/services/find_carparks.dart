@@ -29,6 +29,7 @@ class FindCarpark {
       'query': constant + keyword,
       'radius': '2000',
     };
+    print('querying: $constant ' + keyword);
     var response = await dio.get(url, data: parameters);
 
     // return response.data['results']

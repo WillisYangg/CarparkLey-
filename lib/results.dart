@@ -3,6 +3,7 @@ class Results {
   String rate;
   String vacancy;
   String distance;
+  String lotType;
   dynamic infoList;
 
   Results(
@@ -10,5 +11,6 @@ class Results {
       required this.rate,
       required this.vacancy,
       required this.distance,
-      required this.infoList});
+      required this.infoList,
+      required this.lotType});
 }

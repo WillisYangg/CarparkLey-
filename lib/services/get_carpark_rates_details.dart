@@ -13,7 +13,7 @@ import 'get_carpark_info.dart';
 const uraAccessKey = '62f968e9-3534-4c1c-9250-44e04671037c';
 
 class GetCarparkRatesDetails {
-  Future<dynamic> carparkRatesDetails(String cpName) async {
+  Future<dynamic> carparkRatesDetails(String cpName, String lotType) async {
     final response = await http.get(
       Uri.https(
         'www.ura.gov.sg',
@@ -33,7 +33,7 @@ class GetCarparkRatesDetails {
       var cpNum = responseJson['Result'][i]['ppCode'].toString();
       print('cpNameList is $cpName');
       print('cpNum is $cpNum');
-      if (cpName.toString().contains(cpNum)) {
+      if (cpName.toString().contains(cpNum) && lotType == 'C') {
         String weekdayMin = responseJson['Result'][i]['weekdayMin'].toString();
         String weekdayRate =
             responseJson['Result'][i]['weekdayRate'].toString();

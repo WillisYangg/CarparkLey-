@@ -119,11 +119,16 @@ class GetCarparkInfo {
             cpName = cpName + ' ' + cpNumber;
             String lotsAvail = responseJson['Result'][i]['lotsAvailable'];
             print('Lots Available: $lotsAvail');
-            String lotType = responseJson['Result'][i]['lotType'];
-            print('Lot type: $lotType');
-            List<String> lotInfo = [cpAddress, lotsAvail, lotType];
-            map[cpName] = lotInfo;
-            print('map is currently: $map');
+            if (responseJson['Result'][i]['lotType'] == 'C') {
+              String lotType = 'C';
+              print('Lot type: $lotType');
+              List<String> lotInfo = [cpAddress, lotsAvail, lotType];
+              print('lotInfo list currently: $lotInfo');
+              map[cpName] = lotInfo;
+              print('map is currently: $map');
+            } else {
+              print('LotType is not C, rejected, not added to map');
+            }
           }
           // var googlelat = carparks[x].toString().substring(6, 14);
           // print('google lat is $googlelat');
