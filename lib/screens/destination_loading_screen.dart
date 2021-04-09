@@ -12,9 +12,10 @@ import 'dart:math';
 import 'dart:async';
 
 class DestLoadingPage extends StatefulWidget {
-  DestLoadingPage({this.destination});
+  DestLoadingPage({this.destination, this.vehicleType});
   static String id = "dest_loading_screen";
   final destination;
+  final vehicleType;
   @override
   _DestLoadingPageState createState() => _DestLoadingPageState();
 }
@@ -32,7 +33,7 @@ class _DestLoadingPageState extends State<DestLoadingPage> {
     // TODO: implement initState
     super.initState();
     // timer = Timer.periodic(Duration(seconds: 5), (Timer t) => printRandomMsg());
-    getCarparks(widget.destination);
+    getCarparks(widget.destination, widget.vehicleType);
   }
 
   @override
@@ -41,16 +42,18 @@ class _DestLoadingPageState extends State<DestLoadingPage> {
     super.dispose();
   }
 
-  dynamic getCarparks(String destination) async {
-    print('destination is $destination');
-    Map carparklist = await GetCarparkInfo().carparkInformation(destination);
+  dynamic getCarparks(String destination, String vehicleType) async {
+    print('destination is: $destination');
+    print('Vehicle type is: $vehicleType');
+    Map carparklist =
+        await GetCarparkInfo().carparkInformation(destination, vehicleType);
     if (carparklist.isEmpty) {
       Navigator.pushNamed(context, ErrorScreen.id);
     } else {
       // // return GetCarparkInfo().checkifSame(destination);
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         print('carpark list before results screen: $carparklist');
-        return ResultsPage(carparks: carparklist);
+        return ResultsPage(carparks: carparklist, lotType: vehicleType);
       }));
     }
   }

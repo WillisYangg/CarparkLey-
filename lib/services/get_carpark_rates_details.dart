@@ -33,7 +33,9 @@ class GetCarparkRatesDetails {
       var cpNum = responseJson['Result'][i]['ppCode'].toString();
       print('cpNameList is $cpName');
       print('cpNum is $cpNum');
-      if (cpName.toString().contains(cpNum) && lotType == 'C') {
+      if (cpName.toString().contains(cpNum) &&
+          responseJson['Result'][i]['vehCat'].toString() == lotType) {
+        print('Carpark found');
         String weekdayMin = responseJson['Result'][i]['weekdayMin'].toString();
         String weekdayRate =
             responseJson['Result'][i]['weekdayRate'].toString();
@@ -62,5 +64,6 @@ class GetCarparkRatesDetails {
         return cpRatesDetails;
       }
     }
+    print('Oops something went wrong somewhere');
   }
 }

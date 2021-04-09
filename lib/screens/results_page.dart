@@ -11,8 +11,9 @@ import 'package:carparkley/services/coordinate_converter.dart';
 import 'package:carparkley/services/get_carpark_rates_details.dart';
 
 class ResultsPage extends StatefulWidget {
-  ResultsPage({this.carparks});
+  ResultsPage({this.carparks, this.lotType});
   final carparks;
+  final lotType;
   static String id = "results_screen";
 
   @override
@@ -47,6 +48,7 @@ class _ResultsPageState extends State<ResultsPage> {
   @override
   Widget build(BuildContext context) {
     var carparkList = widget.carparks;
+    String lotType = widget.lotType;
     print('carpark list in results screen $carparkList');
     List cpNameList = carparkList.keys.toList();
     List cpInfoList = carparkList.values.toList();
@@ -62,8 +64,8 @@ class _ResultsPageState extends State<ResultsPage> {
               rate: 'click to view',
               infoList: cpInfoList[0],
               vacancy: cpInfoList[0][1],
-              distance: '-',
-              lotType: 'C'),
+              distance: cpInfoList[0][3],
+              lotType: lotType),
         ];
         return results
             .map((resultsrow) => DataRow(cells: [
@@ -105,8 +107,8 @@ class _ResultsPageState extends State<ResultsPage> {
                 rate: 'click to view',
                 infoList: cpInfoList[i],
                 vacancy: cpInfoList[i][1],
-                distance: '-',
-                lotType: 'C'),
+                distance: cpInfoList[i][3],
+                lotType: lotType),
             // Results(carparkname: 'C', rate: '0.5', vacancy: '20', distance: '300'),
             // Results(carparkname: 'D', rate: '0.7', vacancy: '12', distance: '120'),
             // Results(carparkname: 'E', rate: '0.5', vacancy: '1', distance: '500'),

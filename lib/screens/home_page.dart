@@ -1,6 +1,9 @@
 import 'package:carparkley/screens/login_register/login_page.dart';
 import 'package:carparkley/main.dart';
 import 'package:carparkley/screens/results_page.dart';
+import 'package:carparkley/screens/settings_screen.dart';
+import 'package:carparkley/services/get_distance.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places_hoc081098/flutter_google_places_hoc081098.dart';
@@ -10,6 +13,7 @@ import '../constants.dart';
 import '../services/find_carparks.dart';
 import 'destination_loading_screen.dart';
 import 'login_register/register_page.dart';
+import 'settings_screen.dart';
 
 class HomePage extends StatefulWidget {
   static String id = "home_screen";
@@ -56,10 +60,19 @@ class _HomePageState extends State<HomePage> {
     this.getCurrentUser();
   }
 
+  dynamic vehicleType;
+  Future<void> didVehicleTypeChange() async {
+    final vehicle = await checkWhatChanged();
+    setState(() {
+      vehicleType = vehicle;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    didVehicleTypeChange();
+    String vehicle = vehicleType;
     String destinationName = '';
-
     void getLocation(userLocation) async {
       await userLocation.getCurrentLocation();
       print(userLocation.latitude);
@@ -99,17 +112,23 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(color: Colors.black),
                   decoration: kTextfieldInputDecoration,
                   onTap: () async {
+                    print('Vehicle type is: $vehicle');
                     final Prediction? p = await PlacesAutocomplete.show(
                         context: context,
                         apiKey: googleApiKey,
                         mode: Mode.overlay, // Mode.fullscreen
                         language: "en",
                         components: [new Component(Component.country, "sg")]);
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return DestLoadingPage(
-                          destination: p?.description.toString());
-                    }));
+                    if (p?.description == null) {
+                      AlertDialog();
+                    } else {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return DestLoadingPage(
+                            destination: p?.description.toString(),
+                            vehicleType: vehicle);
+                      }));
+                    }
                   },
                 ),
               ),
@@ -160,6 +179,28 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.white,
                     ),
                     Text('Login',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        )),
+                  ]),
+                ),
+              ),
+              Card(
+                //default card color is white
+                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 107.0),
+                child: RaisedButton(
+                  color: Colors.red,
+                  onPressed: () {
+                    Navigator.pushNamed(context, SettingsScreen.id);
+                  },
+                  child: Row(children: [
+                    Icon(
+                      Icons.settings,
+                      color: Colors.white,
+                    ),
+                    Text('Settings',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20.0,

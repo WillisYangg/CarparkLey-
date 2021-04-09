@@ -1,6 +1,8 @@
+import 'package:carparkley/screens/home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'carpark_info_screen.dart';
+import 'home_page.dart';
 
 class SettingsScreen extends StatefulWidget {
   static String id = "settings_screen";
@@ -9,10 +11,11 @@ class SettingsScreen extends StatefulWidget {
   _SettingsScreenState createState() => _SettingsScreenState();
 }
 
+String vehicleValue = 'Car';
+String fontValue = '25';
+String language = 'English';
+
 class _SettingsScreenState extends State<SettingsScreen> {
-  String vehicleValue = 'Car';
-  String fontValue = '25';
-  String language = 'English';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -200,7 +203,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Padding(
                 padding: const EdgeInsets.only(right: 15.0),
                 child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      _showMyDialog();
+                    },
                     child: Text(
                       'Apply changes',
                       style:
@@ -213,5 +218,42 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ],
       ),
     );
+  }
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Updated'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Your changes have been saved'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+Future<String> checkWhatChanged() async {
+  if (vehicleValue == 'MotorBike') {
+    return 'M';
+  } else if (vehicleValue == 'Heavy') {
+    return 'H';
+  } else {
+    return 'C';
   }
 }

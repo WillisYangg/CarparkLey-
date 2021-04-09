@@ -9,6 +9,7 @@ import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import 'coordinate_converter.dart';
 import 'package:carparkley/services/get_carpark_rates_details.dart';
+import 'get_distance.dart';
 
 const uraAccessKey = '62f968e9-3534-4c1c-9250-44e04671037c';
 
@@ -24,7 +25,8 @@ class GetCarparkInfo {
     return token;
   }
 
-  Future<dynamic> carparkInformation(String destination) async {
+  Future<dynamic> carparkInformation(
+      String destination, String vehicleType) async {
     // var dio = Dio();
     // var url = 'www.ura.gov.sg/uraDataService/invokeUraDS';
     // var parameters = {
@@ -119,15 +121,19 @@ class GetCarparkInfo {
             cpName = cpName + ' ' + cpNumber;
             String lotsAvail = responseJson['Result'][i]['lotsAvailable'];
             print('Lots Available: $lotsAvail');
-            if (responseJson['Result'][i]['lotType'] == 'C') {
-              String lotType = 'C';
+            if (responseJson['Result'][i]['lotType'] == vehicleType) {
+              String lotType = vehicleType;
               print('Lot type: $lotType');
-              List<String> lotInfo = [cpAddress, lotsAvail, lotType];
+              var distance =
+                  await GetDistance().getDistance(cpAddress, destination);
+              distance = distance.toString();
+              print('distance is: $distance');
+              List<String> lotInfo = [cpAddress, lotsAvail, lotType, distance];
               print('lotInfo list currently: $lotInfo');
               map[cpName] = lotInfo;
               print('map is currently: $map');
             } else {
-              print('LotType is not C, rejected, not added to map');
+              print('LotType is not $vehicleType, rejected; not added to map');
             }
           }
           // var googlelat = carparks[x].toString().substring(6, 14);
