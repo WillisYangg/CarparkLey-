@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:share/share.dart';
 import '../main.dart';
 import 'package:flutter/material.dart';
+import 'package:maps_launcher/maps_launcher.dart';
 
 class CarparkInfo extends StatefulWidget {
   CarparkInfo({this.carparkInformation, this.cpName, this.cpInfo});
@@ -364,7 +365,7 @@ class _CarparkInfoState extends State<CarparkInfo> {
                   ),
                   FlatButton(
                     color: Colors.deepPurpleAccent,
-                    onPressed: () {},
+                    onPressed: () => MapsLauncher.launchQuery(cpInfo[0]),
                     child: Container(
                       height: 30,
                       child: Row(
