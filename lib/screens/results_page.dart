@@ -101,21 +101,26 @@ class _ResultsPageState extends State<ResultsPage> {
         List<Results> results = [];
         int counter = 0;
         for (int i = 0; i < carparkList.length; i++) {
-          results.add(
-            Results(
-                carparkname: cpNameList[i],
-                rate: 'click to view',
-                infoList: cpInfoList[i],
-                vacancy: cpInfoList[i][1],
-                distance: cpInfoList[i][3],
-                lotType: lotType),
-            // Results(carparkname: 'C', rate: '0.5', vacancy: '20', distance: '300'),
-            // Results(carparkname: 'D', rate: '0.7', vacancy: '12', distance: '120'),
-            // Results(carparkname: 'E', rate: '0.5', vacancy: '1', distance: '500'),
-            // Results(carparkname: 'F', rate: '0.5', vacancy: '20', distance: '300'),
-            // Results(carparkname: 'G', rate: '0.7', vacancy: '12', distance: '120'),
-            // Results(carparkname: 'H', rate: '0.5', vacancy: '1', distance: '500'),
-          );
+          if (double.parse(
+                cpInfoList[i][3].substring(0, cpInfoList[i][3].length - 3),
+              ) <
+              2.0) {
+            results.add(
+              Results(
+                  carparkname: cpNameList[i],
+                  rate: 'click to view',
+                  infoList: cpInfoList[i],
+                  vacancy: cpInfoList[i][1],
+                  distance: cpInfoList[i][3],
+                  lotType: lotType),
+              // Results(carparkname: 'C', rate: '0.5', vacancy: '20', distance: '300'),
+              // Results(carparkname: 'D', rate: '0.7', vacancy: '12', distance: '120'),
+              // Results(carparkname: 'E', rate: '0.5', vacancy: '1', distance: '500'),
+              // Results(carparkname: 'F', rate: '0.5', vacancy: '20', distance: '300'),
+              // Results(carparkname: 'G', rate: '0.7', vacancy: '12', distance: '120'),
+              // Results(carparkname: 'H', rate: '0.5', vacancy: '1', distance: '500'),
+            );
+          }
         }
         return results
             .map(
