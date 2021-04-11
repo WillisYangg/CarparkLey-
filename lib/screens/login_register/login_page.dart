@@ -76,9 +76,9 @@ class _LoginPageState extends State<LoginPage> {
                   UserCredential user = await _auth.signInWithEmailAndPassword(
                       email: _email, password: _password);
                   print('Login successful!');
+
                   if (user != null) {
-                    Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => HomePage()));
+                    _showMyDialog();
                   }
                 } on FirebaseAuthException catch (e) {
                   print(e.code);
@@ -128,6 +128,33 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Sucessful'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Login successful!'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => HomePage()));
+                }),
+          ],
+        );
+      },
     );
   }
 }

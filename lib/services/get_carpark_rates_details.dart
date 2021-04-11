@@ -33,35 +33,113 @@ class GetCarparkRatesDetails {
       var cpNum = responseJson['Result'][i]['ppCode'].toString();
       print('cpNameList is $cpName');
       print('cpNum is $cpNum');
-      if (cpName.toString().contains(cpNum) &&
-          responseJson['Result'][i]['vehCat'].toString() == lotType) {
-        print('Carpark found');
-        String weekdayMin = responseJson['Result'][i]['weekdayMin'].toString();
-        String weekdayRate =
-            responseJson['Result'][i]['weekdayRate'].toString();
-        String parkingSystem =
-            responseJson['Result'][i]['parkingSystem'].toString();
-        String satdayMin = responseJson['Result'][i]['satdayMin'].toString();
-        String satdayRate = responseJson['Result'][i]['satdayRate'].toString();
-        String sunPHMin = responseJson['Result'][i]['sunPHMin'].toString();
-        String sunPHRate = responseJson['Result'][i]['sunPHRate'].toString();
-        String startTime = responseJson['Result'][i]['startTime'].toString();
-        String endTime = responseJson['Result'][i]['endTime'].toString();
-        String parkCapacity =
-            responseJson['Result'][i]['parkCapacity'].toString();
-        List<String> cpRatesDetails = [];
-        cpRatesDetails.add(weekdayMin);
-        cpRatesDetails.add(weekdayRate);
-        cpRatesDetails.add(parkingSystem);
-        cpRatesDetails.add(satdayMin);
-        cpRatesDetails.add(satdayRate);
-        cpRatesDetails.add(sunPHMin);
-        cpRatesDetails.add(sunPHRate);
-        cpRatesDetails.add(startTime);
-        cpRatesDetails.add(endTime);
-        cpRatesDetails.add(parkCapacity);
-        print("cpRatesDetails is: $cpRatesDetails");
-        return cpRatesDetails;
+      if (cpName.toString().contains(cpNum)) {
+        if (lotType == 'C' &&
+            (responseJson['Result'][i]['vehCat'].toString() == lotType ||
+                responseJson['Result'][i]['vehCat'].toString() == 'Car' ||
+                responseJson['Result'][i]['vehCat'].toString() == 'car')) {
+          print('Carpark found');
+          String weekdayMin =
+              responseJson['Result'][i]['weekdayMin'].toString();
+          String weekdayRate =
+              responseJson['Result'][i]['weekdayRate'].toString();
+          String parkingSystem =
+              responseJson['Result'][i]['parkingSystem'].toString();
+          String satdayMin = responseJson['Result'][i]['satdayMin'].toString();
+          String satdayRate =
+              responseJson['Result'][i]['satdayRate'].toString();
+          String sunPHMin = responseJson['Result'][i]['sunPHMin'].toString();
+          String sunPHRate = responseJson['Result'][i]['sunPHRate'].toString();
+          String startTime = responseJson['Result'][i]['startTime'].toString();
+          String endTime = responseJson['Result'][i]['endTime'].toString();
+          String parkCapacity =
+              responseJson['Result'][i]['parkCapacity'].toString();
+          List<String> cpRatesDetails = [];
+          cpRatesDetails.add(weekdayMin);
+          cpRatesDetails.add(weekdayRate);
+          cpRatesDetails.add(parkingSystem);
+          cpRatesDetails.add(satdayMin);
+          cpRatesDetails.add(satdayRate);
+          cpRatesDetails.add(sunPHMin);
+          cpRatesDetails.add(sunPHRate);
+          cpRatesDetails.add(startTime);
+          cpRatesDetails.add(endTime);
+          cpRatesDetails.add(parkCapacity);
+          print("cpRatesDetails is: $cpRatesDetails");
+          return cpRatesDetails;
+        }
+        if (lotType == 'M' &&
+            (responseJson['Result'][i]['vehCat'].toString() == lotType ||
+                responseJson['Result'][i]['vehCat'].toString() ==
+                    'Motorcycle' ||
+                responseJson['Result'][i]['vehCat'].toString() ==
+                    'motorcycle')) {
+          print('Carpark found');
+          String weekdayMin =
+              responseJson['Result'][i]['weekdayMin'].toString();
+          String weekdayRate =
+              responseJson['Result'][i]['weekdayRate'].toString();
+          String parkingSystem =
+              responseJson['Result'][i]['parkingSystem'].toString();
+          String satdayMin = responseJson['Result'][i]['satdayMin'].toString();
+          String satdayRate =
+              responseJson['Result'][i]['satdayRate'].toString();
+          String sunPHMin = responseJson['Result'][i]['sunPHMin'].toString();
+          String sunPHRate = responseJson['Result'][i]['sunPHRate'].toString();
+          String startTime = responseJson['Result'][i]['startTime'].toString();
+          String endTime = responseJson['Result'][i]['endTime'].toString();
+          String parkCapacity =
+              responseJson['Result'][i]['parkCapacity'].toString();
+          List<String> cpRatesDetails = [];
+          cpRatesDetails.add(weekdayMin);
+          cpRatesDetails.add(weekdayRate);
+          cpRatesDetails.add(parkingSystem);
+          cpRatesDetails.add(satdayMin);
+          cpRatesDetails.add(satdayRate);
+          cpRatesDetails.add(sunPHMin);
+          cpRatesDetails.add(sunPHRate);
+          cpRatesDetails.add(startTime);
+          cpRatesDetails.add(endTime);
+          cpRatesDetails.add(parkCapacity);
+          print("cpRatesDetails is: $cpRatesDetails");
+          return cpRatesDetails;
+        }
+        if (lotType == 'H' &&
+            (responseJson['Result'][i]['vehCat'].toString() == lotType ||
+                responseJson['Result'][i]['vehCat'].toString() ==
+                    'Heavy Vehicle' ||
+                responseJson['Result'][i]['vehCat'].toString() ==
+                    'Heavy vehicle')) {
+          print('Carpark found');
+          String weekdayMin =
+              responseJson['Result'][i]['weekdayMin'].toString();
+          String weekdayRate =
+              responseJson['Result'][i]['weekdayRate'].toString();
+          String parkingSystem =
+              responseJson['Result'][i]['parkingSystem'].toString();
+          String satdayMin = responseJson['Result'][i]['satdayMin'].toString();
+          String satdayRate =
+              responseJson['Result'][i]['satdayRate'].toString();
+          String sunPHMin = responseJson['Result'][i]['sunPHMin'].toString();
+          String sunPHRate = responseJson['Result'][i]['sunPHRate'].toString();
+          String startTime = responseJson['Result'][i]['startTime'].toString();
+          String endTime = responseJson['Result'][i]['endTime'].toString();
+          String parkCapacity =
+              responseJson['Result'][i]['parkCapacity'].toString();
+          List<String> cpRatesDetails = [];
+          cpRatesDetails.add(weekdayMin);
+          cpRatesDetails.add(weekdayRate);
+          cpRatesDetails.add(parkingSystem);
+          cpRatesDetails.add(satdayMin);
+          cpRatesDetails.add(satdayRate);
+          cpRatesDetails.add(sunPHMin);
+          cpRatesDetails.add(sunPHRate);
+          cpRatesDetails.add(startTime);
+          cpRatesDetails.add(endTime);
+          cpRatesDetails.add(parkCapacity);
+          print("cpRatesDetails is: $cpRatesDetails");
+          return cpRatesDetails;
+        }
       }
     }
     print('Oops something went wrong somewhere');

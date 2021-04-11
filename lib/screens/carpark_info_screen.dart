@@ -36,46 +36,52 @@ class _CarparkInfoState extends State<CarparkInfo> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            Container(
+              height: 50,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(15, 0, 0, 30.0),
+                          child: Container(
+                            width: 5,
+                            child: Icon(Icons.keyboard_return),
+                          ),
+                        ),
+                        Container(
+                          child: GestureDetector(
+                            child: Text('return'),
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Expanded(
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(15, 0, 0, 30.0),
-                        child: Container(
-                          width: 5,
-                          child: Icon(Icons.keyboard_return),
-                        ),
-                      ),
-                      GestureDetector(
-                        child: Text('return'),
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                Center(
                   child: Container(
                     child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 15, 30, 0),
-                        child: Text(
-                          cpName.toString(),
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'Regular',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17),
-                        ),
+                      child: Text(
+                        cpName.toString(),
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'Regular',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
                       ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
             Row(
@@ -248,7 +254,7 @@ class _CarparkInfoState extends State<CarparkInfo> {
                           color: Colors.black,
                           fontFamily: 'Regular',
                           fontWeight: FontWeight.w500,
-                          fontSize: 18),
+                          fontSize: 17),
                     ),
                     Text(
                       'Saturday minimum: ' + carparkInformation[3].toString(),
@@ -256,7 +262,7 @@ class _CarparkInfoState extends State<CarparkInfo> {
                           color: Colors.black,
                           fontFamily: 'Regular',
                           fontWeight: FontWeight.w500,
-                          fontSize: 18),
+                          fontSize: 17),
                     ),
                     Text(
                       'Sunday&PH minimum: ' + carparkInformation[5].toString(),
@@ -264,7 +270,7 @@ class _CarparkInfoState extends State<CarparkInfo> {
                           color: Colors.black,
                           fontFamily: 'Regular',
                           fontWeight: FontWeight.w500,
-                          fontSize: 18),
+                          fontSize: 17),
                     ),
                   ],
                 ),

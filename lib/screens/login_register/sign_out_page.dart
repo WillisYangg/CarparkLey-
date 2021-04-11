@@ -1,3 +1,4 @@
+import 'package:carparkley/screens/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -26,6 +27,7 @@ class _SignOutPageState extends State<SignOutPage> {
               color: Colors.red,
               onPressed: () {
                 _auth.signOut();
+                _showMyDialog();
               },
               child: Row(children: [
                 Icon(
@@ -43,6 +45,33 @@ class _SignOutPageState extends State<SignOutPage> {
           ),
         ]),
       ),
+    );
+  }
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Signed Out'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Sign out successully.'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.pushNamed(context, HomePage.id);
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
