@@ -1,5 +1,6 @@
 import 'package:carparkley/screens/login_register/login_page.dart';
 import 'package:carparkley/main.dart';
+import 'package:carparkley/screens/navigation_bar_screen.dart';
 import 'package:carparkley/screens/results_page.dart';
 import 'package:carparkley/screens/settings_screen.dart';
 import 'package:carparkley/services/get_distance.dart';
@@ -83,10 +84,10 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: Icon(Icons.menu),
         title: Text('CarparkLey?'),
         backgroundColor: Colors.red,
       ),
+      drawer: Sidenav(isloggedin),
       body: Center(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -145,92 +146,92 @@ class _HomePageState extends State<HomePage> {
                             {print('Nothing was entered!')}
                         }),
               ),
-              Card(
-                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 107.0),
-                child: RaisedButton(
-                  color: Colors.red,
-                  onPressed: () {
-                    Navigator.pushNamed(context, RegisterPage.id);
-                  },
-                  child: Row(children: [
-                    Icon(
-                      Icons.mail,
-                      color: Colors.white,
-                    ),
-                    Text('Register',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        )),
-                  ]),
-                ),
-              ),
-              Card(
-                //default card color is white
-                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 107.0),
-                child: RaisedButton(
-                  color: Colors.red,
-                  onPressed: () {
-                    Navigator.pushNamed(context, LoginPage.id);
-                  },
-                  child: Row(children: [
-                    Icon(
-                      Icons.login,
-                      color: Colors.white,
-                    ),
-                    Text('Login',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        )),
-                  ]),
-                ),
-              ),
-              Card(
-                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 107.0),
-                child: RaisedButton(
-                  color: Colors.red,
-                  onPressed: () {
-                    _auth.signOut();
-                  },
-                  child: Row(children: [
-                    Icon(
-                      Icons.logout,
-                      color: Colors.white,
-                    ),
-                    Text('Sign Out',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        )),
-                  ]),
-                ),
-              ),
-              Card(
-                //default card color is white
-                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 107.0),
-                child: RaisedButton(
-                  color: Colors.red,
-                  onPressed: () {
-                    Navigator.pushNamed(context, SettingsScreen.id);
-                  },
-                  child: Row(children: [
-                    Icon(
-                      Icons.settings,
-                      color: Colors.white,
-                    ),
-                    Text('Settings',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        )),
-                  ]),
-                ),
-              ),
+              // Card(
+              //   margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 107.0),
+              //   child: RaisedButton(
+              //     color: Colors.red,
+              //     onPressed: () {
+              //       Navigator.pushNamed(context, RegisterPage.id);
+              //     },
+              //     child: Row(children: [
+              //       Icon(
+              //         Icons.mail,
+              //         color: Colors.white,
+              //       ),
+              //       Text('Register',
+              //           style: TextStyle(
+              //             color: Colors.white,
+              //             fontSize: 20.0,
+              //             fontWeight: FontWeight.bold,
+              //           )),
+              //     ]),
+              //   ),
+              // ),
+              // Card(
+              //   //default card color is white
+              //   margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 107.0),
+              //   child: RaisedButton(
+              //     color: Colors.red,
+              //     onPressed: () {
+              //       Navigator.pushNamed(context, LoginPage.id);
+              //     },
+              //     child: Row(children: [
+              //       Icon(
+              //         Icons.login,
+              //         color: Colors.white,
+              //       ),
+              //       Text('Login',
+              //           style: TextStyle(
+              //             color: Colors.white,
+              //             fontSize: 20.0,
+              //             fontWeight: FontWeight.bold,
+              //           )),
+              //     ]),
+              //   ),
+              // ),
+              // Card(
+              //   margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 107.0),
+              //   child: RaisedButton(
+              //     color: Colors.red,
+              //     onPressed: () {
+              //       _auth.signOut();
+              //     },
+              //     child: Row(children: [
+              //       Icon(
+              //         Icons.logout,
+              //         color: Colors.white,
+              //       ),
+              //       Text('Sign Out',
+              //           style: TextStyle(
+              //             color: Colors.white,
+              //             fontSize: 20.0,
+              //             fontWeight: FontWeight.bold,
+              //           )),
+              //     ]),
+              //   ),
+              // ),
+              // Card(
+              //   //default card color is white
+              //   margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 107.0),
+              //   child: RaisedButton(
+              //     color: Colors.red,
+              //     onPressed: () {
+              //       Navigator.pushNamed(context, SettingsScreen.id);
+              //     },
+              //     child: Row(children: [
+              //       Icon(
+              //         Icons.settings,
+              //         color: Colors.white,
+              //       ),
+              //       Text('Settings',
+              //           style: TextStyle(
+              //             color: Colors.white,
+              //             fontSize: 20.0,
+              //             fontWeight: FontWeight.bold,
+              //           )),
+              //     ]),
+              //   ),
+              // ),
             ],
           ),
         ),
