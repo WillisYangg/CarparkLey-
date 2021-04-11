@@ -19,6 +19,34 @@ class _LoginPageState extends State<LoginPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   late String _email, _password;
 
+  showError(String errormessage, String title) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(title),
+            content: Text(errormessage),
+            actions: <Widget>[
+              ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                    (Set<MaterialState> states) {
+                      if (states.contains(MaterialState.pressed))
+                        return Colors.grey;
+                      return Colors.red; // Use the component's default.
+                    },
+                  ),
+                ),
+                child: Text("Try Again"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,14 +75,34 @@ class _LoginPageState extends State<LoginPage> {
                 try {
                   UserCredential user = await _auth.signInWithEmailAndPassword(
                       email: _email, password: _password);
+                  print('Login successful!');
                   if (user != null) {
                     Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => HomePage()));
                   }
-                } catch (e) {
-                  print(e);
+                } on FirebaseAuthException catch (e) {
+                  print(e.code);
+                  switch (e.code) {
+                    case "invalid-email":
+                      {
+                        showError(
+                            'Please write the email in the proper format.',
+                            'Invalid Email');
+                        break;
+                      }
+                    case "user-not-found":
+                      {
+                        showError('This email is not registered., ',
+                            'Not Registered');
+                        break;
+                      }
+                    case "wrong-password":
+                      {
+                        showError('Password is wrong.', 'Invalid Password');
+                        break;
+                      }
+                  }
                 }
-                print('Login successful!');
               },
               child: Text('LOGIN'),
             ),

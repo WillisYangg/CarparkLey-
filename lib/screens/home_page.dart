@@ -58,6 +58,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     this.getCurrentUser();
+    print(isloggedin);
   }
 
   dynamic vehicleType;
@@ -179,6 +180,27 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.white,
                     ),
                     Text('Login',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        )),
+                  ]),
+                ),
+              ),
+              Card(
+                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 107.0),
+                child: RaisedButton(
+                  color: Colors.red,
+                  onPressed: () {
+                    _auth.signOut();
+                  },
+                  child: Row(children: [
+                    Icon(
+                      Icons.logout,
+                      color: Colors.white,
+                    ),
+                    Text('Sign Out',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20.0,
