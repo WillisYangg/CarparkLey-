@@ -162,36 +162,38 @@ class _ResultsPageState extends State<ResultsPage> {
         List<Results> results = [];
         int counter = 0;
         for (int i = 0; i < carparkList.length; i++) {
-          if (cpInfoList[0][3].substring(cpInfoList[0][3].length - 2, cpInfoList[0][3].length) == 'km') if (double
-                  .parse(
-                cpInfoList[0][3].substring(0, cpInfoList[0][3].length - 3),
-              ) <
-              2.0) {
-            results.add(
-              Results(
-                  carparkname: cpNameList[i],
-                  rate: 'click to view',
-                  infoList: cpInfoList[i],
-                  vacancy: cpInfoList[i][1],
-                  distance: cpInfoList[i][3],
-                  lotType: lotType),
-              // Results(carparkname: 'C', rate: '0.5', vacancy: '20', distance: '300'),
-              // Results(carparkname: 'D', rate: '0.7', vacancy: '12', distance: '120'),
-              // Results(carparkname: 'E', rate: '0.5', vacancy: '1', distance: '500'),
-              // Results(carparkname: 'F', rate: '0.5', vacancy: '20', distance: '300'),
-              // Results(carparkname: 'G', rate: '0.7', vacancy: '12', distance: '120'),
-              // Results(carparkname: 'H', rate: '0.5', vacancy: '1', distance: '500'),
-            );
-          } else {
-            SchedulerBinding.instance?.addPostFrameCallback((_) {
-              Navigator.pushNamed(context, ErrorScreen.id);
-            });
-          }
-          else if (cpInfoList[0][3].substring(
+          if (cpInfoList[0][3].substring(
+                  cpInfoList[0][3].length - 2, cpInfoList[0][3].length) ==
+              'km') {
+            if (double.parse(
+                  cpInfoList[0][3].substring(0, cpInfoList[0][3].length - 3),
+                ) <
+                2.0) {
+              results.add(
+                Results(
+                    carparkname: cpNameList[i],
+                    rate: 'click to view',
+                    infoList: cpInfoList[i],
+                    vacancy: cpInfoList[i][1],
+                    distance: cpInfoList[i][3],
+                    lotType: lotType),
+                // Results(carparkname: 'C', rate: '0.5', vacancy: '20', distance: '300'),
+                // Results(carparkname: 'D', rate: '0.7', vacancy: '12', distance: '120'),
+                // Results(carparkname: 'E', rate: '0.5', vacancy: '1', distance: '500'),
+                // Results(carparkname: 'F', rate: '0.5', vacancy: '20', distance: '300'),
+                // Results(carparkname: 'G', rate: '0.7', vacancy: '12', distance: '120'),
+                // Results(carparkname: 'H', rate: '0.5', vacancy: '1', distance: '500'),
+              );
+            } else {
+              SchedulerBinding.instance?.addPostFrameCallback((_) {
+                Navigator.pushNamed(context, ErrorScreen.id);
+              });
+            }
+          } else if (cpInfoList[0][3].substring(
                   cpInfoList[0][3].length - 2, cpInfoList[0][3].length) ==
               ' m') if (int.parse(
                   cpInfoList[0][3].substring(0, cpInfoList[0][3].length - 2)) <
-              2000)
+              2000) {
             results.add(Results(
                 carparkname: cpNameList[i],
                 rate: 'click to view',
@@ -199,7 +201,7 @@ class _ResultsPageState extends State<ResultsPage> {
                 vacancy: cpInfoList[i][1],
                 distance: cpInfoList[i][3],
                 lotType: lotType));
-          else {
+          } else {
             SchedulerBinding.instance?.addPostFrameCallback((_) {
               Navigator.pushNamed(context, ErrorScreen.id);
             });

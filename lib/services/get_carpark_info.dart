@@ -135,70 +135,39 @@ class GetCarparkInfo {
               print('lotInfo list currently: $lotInfo');
               map[cpName] = lotInfo;
               print('map is currently: $map');
-              if (vehicleType == 'M' &&
-                  (responseJson['Result'][i]['lotType'] == vehicleType ||
-                      responseJson['Result'][i]['lotType'] == 'Motorcycle' ||
-                      responseJson['Result'][i]['lotType'] == 'motorcycle')) {
-                String lotType = vehicleType;
-                print('Lot type: $lotType');
-                var distance =
-                    await GetDistance().getDistance(cpAddress, destination);
-                distance = distance.toString();
-                print('distance is: $distance');
-                List<String> lotInfo = [
-                  cpAddress,
-                  lotsAvail,
-                  lotType,
-                  distance
-                ];
-                print('lotInfo list currently: $lotInfo');
-                map[cpName] = lotInfo;
-                print('map is currently: $map');
-              }
-              if (vehicleType == 'C' &&
-                  (responseJson['Result'][i]['lotType'] == vehicleType ||
-                      responseJson['Result'][i]['lotType'] == 'Car' ||
-                      responseJson['Result'][i]['lotType'] == 'car')) {
-                String lotType = vehicleType;
-                print('Lot type: $lotType');
-                var distance =
-                    await GetDistance().getDistance(cpAddress, destination);
-                distance = distance.toString();
-                print('distance is: $distance');
-                List<String> lotInfo = [
-                  cpAddress,
-                  lotsAvail,
-                  lotType,
-                  distance
-                ];
-                print('lotInfo list currently: $lotInfo');
-                map[cpName] = lotInfo;
-                print('map is currently: $map');
-              }
-              if (vehicleType == 'H' &&
-                  (responseJson['Result'][i]['lotType'] == vehicleType ||
-                      responseJson['Result'][i]['lotType'] == 'Heavy Vehicle' ||
-                      responseJson['Result'][i]['lotType'] ==
-                          'Heavy vehicle')) {
-                String lotType = vehicleType;
-                print('Lot type: $lotType');
-                var distance =
-                    await GetDistance().getDistance(cpAddress, destination);
-                distance = distance.toString();
-                print('distance is: $distance');
-                List<String> lotInfo = [
-                  cpAddress,
-                  lotsAvail,
-                  lotType,
-                  distance
-                ];
-                print('lotInfo list currently: $lotInfo');
-                map[cpName] = lotInfo;
-                print('map is currently: $map');
-              }
-            } else {
-              print('LotType is not $vehicleType, rejected; not added to map');
             }
+            if (vehicleType == 'M' &&
+                (responseJson['Result'][i]['lotType'] == vehicleType ||
+                    responseJson['Result'][i]['lotType'] == 'Motorcycle' ||
+                    responseJson['Result'][i]['lotType'] == 'motorcycle')) {
+              String lotType = vehicleType;
+              print('Lot type: $lotType');
+              var distance =
+                  await GetDistance().getDistance(cpAddress, destination);
+              distance = distance.toString();
+              print('distance is: $distance');
+              List<String> lotInfo = [cpAddress, lotsAvail, lotType, distance];
+              print('lotInfo list currently: $lotInfo');
+              map[cpName] = lotInfo;
+              print('map is currently: $map');
+            }
+            if (vehicleType == 'H' &&
+                (responseJson['Result'][i]['lotType'] == vehicleType ||
+                    responseJson['Result'][i]['lotType'] == 'Heavy Vehicle' ||
+                    responseJson['Result'][i]['lotType'] == 'Heavy vehicle')) {
+              String lotType = vehicleType;
+              print('Lot type: $lotType');
+              var distance =
+                  await GetDistance().getDistance(cpAddress, destination);
+              distance = distance.toString();
+              print('distance is: $distance');
+              List<String> lotInfo = [cpAddress, lotsAvail, lotType, distance];
+              print('lotInfo list currently: $lotInfo');
+              map[cpName] = lotInfo;
+              print('map is currently: $map');
+            }
+          } else {
+            print('LotType is not $vehicleType, rejected; not added to map');
           }
           // var googlelat = carparks[x].toString().substring(6, 14);
           // print('google lat is $googlelat');
