@@ -20,7 +20,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("SETTINGS"),
+        title: Text("Settings"),
+        backgroundColor: Colors.red,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

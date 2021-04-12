@@ -1,4 +1,5 @@
 import 'package:carparkley/screens/login_register/login_page.dart';
+import 'package:carparkley/screens/login_register/verify_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../home_page.dart';
@@ -74,7 +75,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 _reEnterPassword = value;
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               onPressed: () async {
                 if (_password != _reEnterPassword) {
                   showError('The Passwords do not match', 'Invalid Password');
@@ -85,8 +86,8 @@ class _RegisterPageState extends State<RegisterPage> {
                             email: _email, password: _password);
                     print('Registered');
                     if (user != null) {
-                      Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => HomePage()));
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => VerifyPage()));
                     }
                   } on FirebaseAuthException catch (e) {
                     print(e.code);

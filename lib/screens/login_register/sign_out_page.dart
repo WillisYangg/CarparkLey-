@@ -66,7 +66,8 @@ class _SignOutPageState extends State<SignOutPage> {
             TextButton(
               child: Text('OK'),
               onPressed: () {
-                Navigator.pushNamed(context, HomePage.id);
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => HomePage()));
               },
             ),
           ],

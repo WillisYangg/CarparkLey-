@@ -40,20 +40,6 @@ class _HomePageState extends State<HomePage> {
       print(e);
     }
   }
-  //
-  // getCurrentUser() async {
-  //   User firebaseUser = _auth.currentUser!;
-  //   await firebaseUser?.reload();
-  //   firebaseUser = _auth.currentUser!;
-  //   if (firebaseUser != null) {
-  //     setState(() {
-  //       this.loggedInUser = firebaseUser;
-  //       this.isloggedin = true;
-  //       print(firebaseUser.email);
-  //       print(isloggedin);
-  //     });
-  //   }
-  // }
 
   @override
   void initState() {
@@ -139,99 +125,13 @@ class _HomePageState extends State<HomePage> {
                 child: ElevatedButton(
                     child: Text(
                       'Search Carparks',
-                      style: TextStyle(color: Colors.black),
+                      style: TextStyle(color: Colors.white),
                     ),
                     onPressed: () => {
                           if (destinationName == '')
                             {print('Nothing was entered!')}
                         }),
               ),
-              // Card(
-              //   margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 107.0),
-              //   child: RaisedButton(
-              //     color: Colors.red,
-              //     onPressed: () {
-              //       Navigator.pushNamed(context, RegisterPage.id);
-              //     },
-              //     child: Row(children: [
-              //       Icon(
-              //         Icons.mail,
-              //         color: Colors.white,
-              //       ),
-              //       Text('Register',
-              //           style: TextStyle(
-              //             color: Colors.white,
-              //             fontSize: 20.0,
-              //             fontWeight: FontWeight.bold,
-              //           )),
-              //     ]),
-              //   ),
-              // ),
-              // Card(
-              //   //default card color is white
-              //   margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 107.0),
-              //   child: RaisedButton(
-              //     color: Colors.red,
-              //     onPressed: () {
-              //       Navigator.pushNamed(context, LoginPage.id);
-              //     },
-              //     child: Row(children: [
-              //       Icon(
-              //         Icons.login,
-              //         color: Colors.white,
-              //       ),
-              //       Text('Login',
-              //           style: TextStyle(
-              //             color: Colors.white,
-              //             fontSize: 20.0,
-              //             fontWeight: FontWeight.bold,
-              //           )),
-              //     ]),
-              //   ),
-              // ),
-              // Card(
-              //   margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 107.0),
-              //   child: RaisedButton(
-              //     color: Colors.red,
-              //     onPressed: () {
-              //       _auth.signOut();
-              //     },
-              //     child: Row(children: [
-              //       Icon(
-              //         Icons.logout,
-              //         color: Colors.white,
-              //       ),
-              //       Text('Sign Out',
-              //           style: TextStyle(
-              //             color: Colors.white,
-              //             fontSize: 20.0,
-              //             fontWeight: FontWeight.bold,
-              //           )),
-              //     ]),
-              //   ),
-              // ),
-              // Card(
-              //   //default card color is white
-              //   margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 107.0),
-              //   child: RaisedButton(
-              //     color: Colors.red,
-              //     onPressed: () {
-              //       Navigator.pushNamed(context, SettingsScreen.id);
-              //     },
-              //     child: Row(children: [
-              //       Icon(
-              //         Icons.settings,
-              //         color: Colors.white,
-              //       ),
-              //       Text('Settings',
-              //           style: TextStyle(
-              //             color: Colors.white,
-              //             fontSize: 20.0,
-              //             fontWeight: FontWeight.bold,
-              //           )),
-              //     ]),
-              //   ),
-              // ),
             ],
           ),
         ),

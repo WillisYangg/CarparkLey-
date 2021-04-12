@@ -1,7 +1,9 @@
 import 'package:carparkley/screens/carpark_info_screen.dart';
+import 'package:carparkley/screens/login_register/verify_screen.dart';
 import 'package:carparkley/screens/settings_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import '../home_page.dart';
 import '../home_page.dart';
 import 'register_page.dart';
@@ -78,7 +80,14 @@ class _LoginPageState extends State<LoginPage> {
                   print('Login successful!');
 
                   if (user != null) {
-                    _showMyDialog();
+                    User u = _auth.currentUser!;
+                    if (!u.emailVerified) {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => VerifyPage()));
+                    }
+                    if (u.emailVerified) {
+                      _showMyDialog();
+                    }
                   }
                 } on FirebaseAuthException catch (e) {
                   print(e.code);
@@ -92,8 +101,8 @@ class _LoginPageState extends State<LoginPage> {
                       }
                     case "user-not-found":
                       {
-                        showError('This email is not registered., ',
-                            'Not Registered');
+                        showError(
+                            'This email is not registered.', 'Not Registered');
                         break;
                       }
                     case "wrong-password":

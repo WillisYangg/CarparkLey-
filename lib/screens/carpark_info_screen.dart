@@ -28,6 +28,7 @@ class _CarparkInfoState extends State<CarparkInfo> {
     print('cpName: $cpName');
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.red,
         title: Center(
           child: Text("CARPARK INFO"),
         ),
