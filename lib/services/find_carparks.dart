@@ -4,7 +4,7 @@ import 'location.dart';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 
-const googleApiKey = 'AIzaSyAsB0nIzUB1-1bZJ6uYmSlcjElJWC4BNtg';
+const googleApiKey = 'AIzaSyDz74V86brNHy9fvgk6cvBv1X2g5BRAU7M';
 
 class FindCarpark {
   // Future<dynamic> carparkInformation() async {

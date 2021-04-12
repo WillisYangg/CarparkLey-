@@ -1,6 +1,8 @@
 import 'package:carparkley/screens/carpark_info_screen.dart';
+import 'package:carparkley/screens/error_screen.dart';
 import 'package:carparkley/services/get_carpark_rates_details.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import '../results.dart';
 import 'home_page.dart';
 import 'destination_loading_screen.dart';
@@ -120,41 +122,46 @@ class _ResultsPageState extends State<ResultsPage> {
               // Results(carparkname: 'G', rate: '0.7', vacancy: '12', distance: '120'),
               // Results(carparkname: 'H', rate: '0.5', vacancy: '1', distance: '500'),
             );
+            return results
+                .map(
+                  (resultsrow) => DataRow(cells: [
+                    DataCell(
+                        Container(
+                            width: 60, //SET width
+                            child: Text(resultsrow.carparkname.toString())),
+                        onTap: () {}),
+                    DataCell(Container(width: 45, child: Text(resultsrow.rate)),
+                        onTap: () async {
+                      print("finding detailed rates for : " +
+                          resultsrow.carparkname);
+                      var cpRatesDetails = await GetCarparkRatesDetails()
+                          .carparkRatesDetails(
+                              resultsrow.carparkname, resultsrow.lotType);
+                      print("Displaying page for: " +
+                          resultsrow.carparkname.toString() +
+                          " with cpInfo: " +
+                          resultsrow.infoList.toString());
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return CarparkInfo(
+                          carparkInformation: cpRatesDetails,
+                          cpName: resultsrow.carparkname,
+                          cpInfo: resultsrow.infoList,
+                        );
+                      }));
+                    }),
+                    DataCell(Text(resultsrow.vacancy.toString()), onTap: () {}),
+                    DataCell(Text(resultsrow.lotType.toString()), onTap: () {}),
+                    DataCell(Text(resultsrow.distance), onTap: () {})
+                  ]),
+                )
+                .toList();
+          } else {
+            SchedulerBinding.instance?.addPostFrameCallback((_) {
+              Navigator.pushNamed(context, ErrorScreen.id);
+            });
           }
         }
-        return results
-            .map(
-              (resultsrow) => DataRow(cells: [
-                DataCell(
-                    Container(
-                        width: 60, //SET width
-                        child: Text(resultsrow.carparkname.toString())),
-                    onTap: () {}),
-                DataCell(Container(width: 45, child: Text(resultsrow.rate)),
-                    onTap: () async {
-                  print(
-                      "finding detailed rates for : " + resultsrow.carparkname);
-                  var cpRatesDetails = await GetCarparkRatesDetails()
-                      .carparkRatesDetails(
-                          resultsrow.carparkname, resultsrow.lotType);
-                  print("Displaying page for: " +
-                      resultsrow.carparkname.toString() +
-                      " with cpInfo: " +
-                      resultsrow.infoList.toString());
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return CarparkInfo(
-                      carparkInformation: cpRatesDetails,
-                      cpName: resultsrow.carparkname,
-                      cpInfo: resultsrow.infoList,
-                    );
-                  }));
-                }),
-                DataCell(Text(resultsrow.vacancy.toString()), onTap: () {}),
-                DataCell(Text(resultsrow.lotType.toString()), onTap: () {}),
-                DataCell(Text(resultsrow.distance), onTap: () {})
-              ]),
-            )
-            .toList();
       }
     }
 
