@@ -100,13 +100,15 @@ class _CarparkInfoState extends State<CarparkInfo> {
                     ),
                   ),
                 ),
-                Text(
-                  cpInfo[0].toString(),
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'Regular',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14),
+                Expanded(
+                  child: Text(
+                    cpInfo[0].toString(),
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Regular',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14),
+                  ),
                 ),
               ],
             ),
