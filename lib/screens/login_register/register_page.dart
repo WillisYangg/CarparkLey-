@@ -14,7 +14,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  late String _email, _password, _reEnterPassword;
+  late String _email, _password, _reEnterPassword = '';
 
   showError(String errormessage, String title) {
     showDialog(
@@ -87,7 +87,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     print('Registered');
                     if (user != null) {
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => VerifyPage()));
+                          builder: (context) => VerifyPage('register')));
                     }
                   } on FirebaseAuthException catch (e) {
                     print(e.code);

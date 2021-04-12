@@ -83,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                     User u = _auth.currentUser!;
                     if (!u.emailVerified) {
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => VerifyPage()));
+                          builder: (context) => VerifyPage('login')));
                     } else if (u.emailVerified) {
                       _showMyDialog();
                     }

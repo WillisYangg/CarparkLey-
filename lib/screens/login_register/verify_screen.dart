@@ -6,6 +6,10 @@ import 'package:flutter/material.dart';
 
 class VerifyPage extends StatefulWidget {
   static String id = "verify_screen";
+
+  String loginOrRegister;
+  VerifyPage(this.loginOrRegister);
+
   @override
   _VerifyPageState createState() => _VerifyPageState();
 }
@@ -14,11 +18,14 @@ class _VerifyPageState extends State<VerifyPage> {
   final auth = FirebaseAuth.instance;
   late User user;
   late Timer timer;
+  late String loginOrRegister;
+
   @override
   void initState() {
+    loginOrRegister = widget.loginOrRegister;
     user = auth.currentUser!;
     user.sendEmailVerification();
-    Timer.periodic(Duration(seconds: 2), (timer) {
+    timer = Timer.periodic(Duration(seconds: 2), (timer) {
       checkEmailVerified();
     });
     super.initState();
@@ -34,7 +41,8 @@ class _VerifyPageState extends State<VerifyPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text('An email has been sent to ${user.email}.Please Verify.'),
+        child: Text(
+            'An email has been sent to ${user.email}.Please Verify to activate your account.'),
       ),
     );
   }
@@ -44,8 +52,38 @@ class _VerifyPageState extends State<VerifyPage> {
     await user.reload();
     if (user.emailVerified) {
       timer.cancel();
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
+      if (loginOrRegister == 'login') {
+        _showMyDialog('Login');
+      } else if (loginOrRegister == 'register') {
+        _showMyDialog('Register');
+      }
     }
+  }
+
+  Future<void> _showMyDialog(String text) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Sucessful'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('$text successful!'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => HomePage()));
+                }),
+          ],
+        );
+      },
+    );
   }
 }
