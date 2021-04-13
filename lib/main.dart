@@ -10,6 +10,7 @@ import 'screens/home_page.dart';
 import 'screens/settings_screen.dart';
 import 'screens/results_page.dart';
 import 'screens/destination_loading_screen.dart';
+import 'package:carparkley/screens/favourites_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +34,8 @@ class MainPage extends StatelessWidget {
         ResultsPage.id: (context) => ResultsPage(),
         DestLoadingPage.id: (context) => DestLoadingPage(),
         ErrorScreen.id: (context) => ErrorScreen(),
-        SignOutPage.id: (context) => SignOutPage()
+        SignOutPage.id: (context) => SignOutPage(),
+        FavouritesPage.id: (context) => FavouritesPage()
       },
     );
   }

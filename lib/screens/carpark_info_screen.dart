@@ -4,6 +4,8 @@ import 'package:share/share.dart';
 import '../main.dart';
 import 'package:flutter/material.dart';
 import 'package:maps_launcher/maps_launcher.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:carparkley/services/favourites.dart';
 
 class CarparkInfo extends StatefulWidget {
   CarparkInfo({this.carparkInformation, this.cpName, this.cpInfo});
@@ -17,6 +19,7 @@ class CarparkInfo extends StatefulWidget {
 }
 
 class _CarparkInfoState extends State<CarparkInfo> {
+  final FirebaseAuth auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     List carparkInformation = widget.carparkInformation;
@@ -326,7 +329,15 @@ class _CarparkInfoState extends State<CarparkInfo> {
                 children: [
                   FlatButton(
                     color: Colors.deepPurpleAccent,
-                    onPressed: () {},
+                    onPressed: () {
+                      if (auth.currentUser!= null) {
+                        final String uid = auth.currentUser!.uid;
+                        print(uid);
+                        final db = FavouritesDatabase(uid);
+                        print("got to db");
+                        db.updateUserData(cpInfo, cpName, carparkInformation);
+                      };
+                    },
                     child: Container(
                       height: 30,
                       child: Row(
