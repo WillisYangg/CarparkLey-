@@ -3,8 +3,8 @@ import 'package:carparkley/screens/login_register/verify_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../home_page.dart';
-import 'rounded_input_field.dart';
-import 'rounded_password_field.dart';
+import '../../components/rounded_input_field.dart';
+import '../../components/rounded_password_field.dart';
 
 class RegisterPage extends StatefulWidget {
   static String id = "register_screen";

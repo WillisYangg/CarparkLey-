@@ -1,6 +1,5 @@
 //@dart = 2.9
 import 'package:carparkley/screens/error_screen.dart';
-import 'package:carparkley/screens/google_maps_directions_screen.dart';
 import 'package:carparkley/screens/login_register/sign_out_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'screens/carpark_info_screen.dart';
@@ -33,7 +32,6 @@ class MainPage extends StatelessWidget {
         CarparkInfo.id: (context) => CarparkInfo(),
         ResultsPage.id: (context) => ResultsPage(),
         DestLoadingPage.id: (context) => DestLoadingPage(),
-        GoogleMapsPage.id: (context) => GoogleMapsPage(),
         ErrorScreen.id: (context) => ErrorScreen(),
         SignOutPage.id: (context) => SignOutPage()
       },

@@ -1,4 +1,4 @@
-class Results {
+class Carpark {
   String carparkname;
   String rate;
   String vacancy;
@@ -6,7 +6,7 @@ class Results {
   String lotType;
   dynamic infoList;
 
-  Results(
+  Carpark(
       {required this.carparkname,
       required this.rate,
       required this.vacancy,

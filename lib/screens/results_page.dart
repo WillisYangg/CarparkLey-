@@ -1,16 +1,15 @@
 import 'package:carparkley/screens/carpark_info_screen.dart';
 import 'package:carparkley/screens/error_screen.dart';
-import 'package:carparkley/services/get_carpark_rates_details.dart';
+import 'file:///C:/Users/glenn/AndroidStudioProjects/CarparkLeyss-/lib/control/MainControlMgr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import '../results.dart';
+import '../entity/carpark.dart';
 import 'home_page.dart';
 import 'destination_loading_screen.dart';
 import 'package:carparkley/main.dart';
-import 'package:carparkley/services/find_carparks.dart';
-import 'package:carparkley/services/get_carpark_info.dart';
+import 'file:///C:/Users/glenn/AndroidStudioProjects/CarparkLeyss-/lib/control/CarparkMgr.dart';
 import 'package:carparkley/services/coordinate_converter.dart';
-import 'package:carparkley/services/get_carpark_rates_details.dart';
+import 'file:///C:/Users/glenn/AndroidStudioProjects/CarparkLeyss-/lib/control/MainControlMgr.dart';
 
 class ResultsPage extends StatefulWidget {
   ResultsPage({this.carparks, this.lotType});
@@ -65,8 +64,8 @@ class _ResultsPageState extends State<ResultsPage> {
               cpInfoList[0][3].substring(0, cpInfoList[0][3].length - 3),
             ) <
             2.0) {
-          var results = <Results>[
-            Results(
+          var results = <Carpark>[
+            Carpark(
                 carparkname: cpNameList[0],
                 rate: 'click to view',
                 infoList: cpInfoList[0],
@@ -87,8 +86,8 @@ class _ResultsPageState extends State<ResultsPage> {
                         onTap: () async {
                       print("finding detailed rates for : " +
                           resultsrow.carparkname);
-                      var cpRatesDetails = await GetCarparkRatesDetails()
-                          .carparkRatesDetails(
+                      var cpRatesDetails = await MainControlMgr()
+                          .getCarpark_info(
                               resultsrow.carparkname, resultsrow.lotType);
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
@@ -114,8 +113,8 @@ class _ResultsPageState extends State<ResultsPage> {
             ' m') if (int.parse(
                 cpInfoList[0][3].substring(0, cpInfoList[0][3].length - 2)) <
             2000) {
-          var results = <Results>[
-            Results(
+          var results = <Carpark>[
+            Carpark(
                 carparkname: cpNameList[0],
                 rate: 'click to view',
                 infoList: cpInfoList[0],
@@ -136,8 +135,8 @@ class _ResultsPageState extends State<ResultsPage> {
                         onTap: () async {
                       print("finding detailed rates for : " +
                           resultsrow.carparkname);
-                      var cpRatesDetails = await GetCarparkRatesDetails()
-                          .carparkRatesDetails(
+                      var cpRatesDetails = await MainControlMgr()
+                          .getCarpark_info(
                               resultsrow.carparkname, resultsrow.lotType);
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
@@ -159,7 +158,7 @@ class _ResultsPageState extends State<ResultsPage> {
           });
         }
       } else {
-        List<Results> results = [];
+        List<Carpark> results = [];
         int counter = 0;
         for (int i = 0; i < carparkList.length; i++) {
           if (cpInfoList[0][3].substring(
@@ -170,7 +169,7 @@ class _ResultsPageState extends State<ResultsPage> {
                 ) <
                 2.0) {
               results.add(
-                Results(
+                Carpark(
                     carparkname: cpNameList[i],
                     rate: 'click to view',
                     infoList: cpInfoList[i],
@@ -194,7 +193,7 @@ class _ResultsPageState extends State<ResultsPage> {
               ' m') if (int.parse(
                   cpInfoList[0][3].substring(0, cpInfoList[0][3].length - 2)) <
               2000) {
-            results.add(Results(
+            results.add(Carpark(
                 carparkname: cpNameList[i],
                 rate: 'click to view',
                 infoList: cpInfoList[i],
@@ -219,9 +218,8 @@ class _ResultsPageState extends State<ResultsPage> {
                     onTap: () async {
                   print(
                       "finding detailed rates for : " + resultsrow.carparkname);
-                  var cpRatesDetails = await GetCarparkRatesDetails()
-                      .carparkRatesDetails(
-                          resultsrow.carparkname, resultsrow.lotType);
+                  var cpRatesDetails = await MainControlMgr().getCarpark_info(
+                      resultsrow.carparkname, resultsrow.lotType);
                   print("Displaying page for: " +
                       resultsrow.carparkname.toString() +
                       " with cpInfo: " +

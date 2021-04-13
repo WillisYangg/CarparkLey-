@@ -1,19 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:carparkley/screens/destination_loading_screen.dart';
-import 'package:carparkley/services/find_carparks.dart';
 import 'package:carparkley/screens/results_page.dart';
-import 'networking.dart';
 import 'dart:convert';
-import 'location.dart';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
-import 'coordinate_converter.dart';
-import 'package:carparkley/services/get_carpark_rates_details.dart';
-import 'get_distance.dart';
+import '../services/coordinate_converter.dart';
+import 'file:///C:/Users/glenn/AndroidStudioProjects/CarparkLeyss-/lib/control/MainControlMgr.dart';
+import 'GoogleMapsMgr.dart';
 
+const googleApiKey = 'AIzaSyDz74V86brNHy9fvgk6cvBv1X2g5BRAU7M';
 const uraAccessKey = '62f968e9-3534-4c1c-9250-44e04671037c';
 
-class GetCarparkInfo {
+class CarparkMgr {
+  Future<dynamic> searchNearby(String keyword) async {
+    String constant = 'car park near';
+    var dio = Dio();
+    var url = 'https://maps.googleapis.com/maps/api/place/textsearch/json';
+    var parameters = {
+      'key': googleApiKey,
+      'query': constant + keyword,
+      'radius': '2000',
+    };
+    print('querying: $constant ' + keyword);
+    var response = await dio.get(url, data: parameters);
+
+    // return response.data['results']
+    //     .map<String>((result) => result['geometry']['location'].toString())
+    //     .toList();
+    return response.data['results'];
+    // final response = await http.get(
+    //   Uri.https(
+    //     'www.ura.gov.sg',
+    //     '/uraDataService/invokeUraDS',
+    //     {'service': 'Car_Park_Availability'},
+    //   ),
+    //   headers: {
+    //     'AccessKey': uraAccessKey,
+    //     'Token': await getDailyToken(),
+    //   },
+    // );
+    //
+    // final responseJson = jsonDecode(response.body);
+  }
+
   Future<String> getDailyToken() async {
     final response = await http.get(
         Uri.https('www.ura.gov.sg', '/uraDataService/insertNewToken.action'),
@@ -25,8 +54,7 @@ class GetCarparkInfo {
     return token;
   }
 
-  Future<dynamic> carparkInformation(
-      String destination, String vehicleType) async {
+  Future<dynamic> locateCarparks(String destination, String vehicleType) async {
     // var dio = Dio();
     // var url = 'www.ura.gov.sg/uraDataService/invokeUraDS';
     // var parameters = {
@@ -94,7 +122,7 @@ class GetCarparkInfo {
         print('rounded Lat = $roundedLat');
         print('rounded Long = $roundedLong');
         print('destination is $destination');
-        var carparks = await FindCarpark().searchNearby(destination);
+        var carparks = await searchNearby(destination);
         print(carparks);
         for (int x = 0; x < carparks.length; x++) {
           print('this is $x th loop');
@@ -127,8 +155,8 @@ class GetCarparkInfo {
                     responseJson['Result'][i]['lotType'] == 'car')) {
               String lotType = vehicleType;
               print('Lot type: $lotType');
-              var distance =
-                  await GetDistance().getDistance(cpAddress, destination);
+              var distance = await GoogleMapsMgr()
+                  .calculateDistance(cpAddress, destination);
               distance = distance.toString();
               print('distance is: $distance');
               List<String> lotInfo = [cpAddress, lotsAvail, lotType, distance];
@@ -142,8 +170,8 @@ class GetCarparkInfo {
                     responseJson['Result'][i]['lotType'] == 'motorcycle')) {
               String lotType = vehicleType;
               print('Lot type: $lotType');
-              var distance =
-                  await GetDistance().getDistance(cpAddress, destination);
+              var distance = await GoogleMapsMgr()
+                  .calculateDistance(cpAddress, destination);
               distance = distance.toString();
               print('distance is: $distance');
               List<String> lotInfo = [cpAddress, lotsAvail, lotType, distance];
@@ -157,8 +185,8 @@ class GetCarparkInfo {
                     responseJson['Result'][i]['lotType'] == 'Heavy vehicle')) {
               String lotType = vehicleType;
               print('Lot type: $lotType');
-              var distance =
-                  await GetDistance().getDistance(cpAddress, destination);
+              var distance = await GoogleMapsMgr()
+                  .calculateDistance(cpAddress, destination);
               distance = distance.toString();
               print('distance is: $distance');
               List<String> lotInfo = [cpAddress, lotsAvail, lotType, distance];

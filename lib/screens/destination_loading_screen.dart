@@ -1,13 +1,11 @@
 import 'package:carparkley/screens/error_screen.dart';
-import 'package:carparkley/services/find_carparks.dart';
-import 'package:carparkley/services/networking.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'results_page.dart';
 import 'package:carparkley/main.dart';
 import 'results_page.dart';
-import 'package:carparkley/services/get_carpark_info.dart';
+import 'file:///C:/Users/glenn/AndroidStudioProjects/CarparkLeyss-/lib/control/CarparkMgr.dart';
 import 'dart:math';
 import 'dart:async';
 
@@ -26,8 +24,6 @@ class DestLoadingPage extends StatefulWidget {
 //"??" in exception handling;null aware operator
 
 class _DestLoadingPageState extends State<DestLoadingPage> {
-  Timer? timer;
-
   @override
   void initState() {
     // TODO: implement initState
@@ -38,7 +34,6 @@ class _DestLoadingPageState extends State<DestLoadingPage> {
 
   @override
   void dispose() {
-    timer?.cancel();
     super.dispose();
   }
 
@@ -46,7 +41,7 @@ class _DestLoadingPageState extends State<DestLoadingPage> {
     print('destination is: $destination');
     print('Vehicle type is: $vehicleType');
     Map carparklist =
-        await GetCarparkInfo().carparkInformation(destination, vehicleType);
+        await CarparkMgr().locateCarparks(destination, vehicleType);
     if (carparklist.isEmpty) {
       Navigator.pushNamed(context, ErrorScreen.id);
     } else {

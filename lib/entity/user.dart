@@ -1,6 +1,4 @@
 import 'dart:ffi';
-
-import '../services/location.dart';
 import 'package:flutter/material.dart';
 
 class User {

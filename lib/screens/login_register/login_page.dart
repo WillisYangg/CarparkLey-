@@ -8,8 +8,8 @@ import '../home_page.dart';
 import '../home_page.dart';
 import 'register_page.dart';
 import 'register_page.dart';
-import 'rounded_input_field.dart';
-import 'rounded_password_field.dart';
+import '../../components/rounded_input_field.dart';
+import '../../components/rounded_password_field.dart';
 
 class LoginPage extends StatefulWidget {
   static String id = "login_screen";
