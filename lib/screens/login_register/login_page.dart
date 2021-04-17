@@ -1,6 +1,3 @@
-import 'package:carparkley/screens/carpark_info_screen.dart';
-import 'package:carparkley/screens/login_register/verify_screen.dart';
-import 'package:carparkley/screens/settings_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -10,6 +7,7 @@ import 'register_page.dart';
 import 'register_page.dart';
 import '../../components/rounded_input_field.dart';
 import '../../components/rounded_password_field.dart';
+import 'package:carparkley/control/LoginManager.dart';
 
 class LoginPage extends StatefulWidget {
   static String id = "login_screen";
@@ -20,34 +18,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   late String _email, _password;
-
-  showError(String errormessage, String title) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text(title),
-            content: Text(errormessage),
-            actions: <Widget>[
-              ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                    (Set<MaterialState> states) {
-                      if (states.contains(MaterialState.pressed))
-                        return Colors.grey;
-                      return Colors.red; // Use the component's default.
-                    },
-                  ),
-                ),
-                child: Text("Try Again"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              )
-            ],
-          );
-        });
-  }
+  late LoginManager loginmanager = LoginManager(_auth);
 
   @override
   Widget build(BuildContext context) {
@@ -73,44 +44,8 @@ class _LoginPageState extends State<LoginPage> {
               },
             ),
             ElevatedButton(
-              onPressed: () async {
-                try {
-                  UserCredential user = await _auth.signInWithEmailAndPassword(
-                      email: _email, password: _password);
-                  print('Login successful!');
-
-                  if (user != null) {
-                    User u = _auth.currentUser!;
-                    if (!u.emailVerified) {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => VerifyPage('login')));
-                    } else if (u.emailVerified) {
-                      _showMyDialog();
-                    }
-                  }
-                } on FirebaseAuthException catch (e) {
-                  print(e.code);
-                  switch (e.code) {
-                    case "invalid-email":
-                      {
-                        showError(
-                            'Please write the email in the proper format.',
-                            'Invalid Email');
-                        break;
-                      }
-                    case "user-not-found":
-                      {
-                        showError(
-                            'This email is not registered.', 'Not Registered');
-                        break;
-                      }
-                    case "wrong-password":
-                      {
-                        showError('Password is wrong.', 'Invalid Password');
-                        break;
-                      }
-                  }
-                }
+              onPressed: () {
+                loginmanager.login(_password, _email, context);
               },
               child: Text('LOGIN'),
             ),
@@ -136,33 +71,6 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ),
       ),
-    );
-  }
-
-  Future<void> _showMyDialog() async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Sucessful'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('Login successful!'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-                child: Text('OK'),
-                onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => HomePage()));
-                }),
-          ],
-        );
-      },
     );
   }
 }

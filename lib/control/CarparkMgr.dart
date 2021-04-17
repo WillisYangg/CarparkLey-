@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import '../services/coordinate_converter.dart';
-import 'file:///C:/Users/glenn/AndroidStudioProjects/CarparkLeyss-/lib/control/MainControlMgr.dart';
+import 'package:carparkley/control/MainControlMgr.dart';
 import 'GoogleMapsMgr.dart';
 
 const googleApiKey = 'AIzaSyDz74V86brNHy9fvgk6cvBv1X2g5BRAU7M';

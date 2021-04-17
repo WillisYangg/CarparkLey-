@@ -1,3 +1,4 @@
+import 'package:carparkley/control/CarparkMgr.dart';
 import 'package:carparkley/screens/error_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -5,7 +6,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'results_page.dart';
 import 'package:carparkley/main.dart';
 import 'results_page.dart';
-import 'file:///C:/Users/glenn/AndroidStudioProjects/CarparkLeyss-/lib/control/CarparkMgr.dart';
 import 'dart:math';
 import 'dart:async';
 

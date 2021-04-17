@@ -1,15 +1,15 @@
 import 'package:carparkley/screens/carpark_info_screen.dart';
 import 'package:carparkley/screens/error_screen.dart';
-import 'file:///C:/Users/glenn/AndroidStudioProjects/CarparkLeyss-/lib/control/MainControlMgr.dart';
+import 'package:carparkley/control/MainControlMgr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import '../entity/carpark.dart';
 import 'home_page.dart';
 import 'destination_loading_screen.dart';
 import 'package:carparkley/main.dart';
-import 'file:///C:/Users/glenn/AndroidStudioProjects/CarparkLeyss-/lib/control/CarparkMgr.dart';
+import 'package:carparkley/control/CarparkMgr.dart';
 import 'package:carparkley/services/coordinate_converter.dart';
-import 'file:///C:/Users/glenn/AndroidStudioProjects/CarparkLeyss-/lib/control/MainControlMgr.dart';
+import 'package:carparkley/control/MainControlMgr.dart';
 
 class ResultsPage extends StatefulWidget {
   ResultsPage({this.carparks, this.lotType});

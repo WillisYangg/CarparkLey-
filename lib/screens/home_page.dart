@@ -3,7 +3,7 @@ import 'package:carparkley/main.dart';
 import 'package:carparkley/screens/navigation_bar_screen.dart';
 import 'package:carparkley/screens/results_page.dart';
 import 'package:carparkley/screens/settings_screen.dart';
-import 'file:///C:/Users/glenn/AndroidStudioProjects/CarparkLeyss-/lib/control/GoogleMapsMgr.dart';
+import 'package:carparkley/control/GoogleMapsMgr.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
