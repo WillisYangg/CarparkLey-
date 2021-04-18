@@ -1,10 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:carparkley/screens/destination_loading_screen.dart';
-import 'package:carparkley/screens/results_page.dart';
 import 'dart:convert';
-import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
-import '../services/coordinate_converter.dart';
 import 'CarparkMgr.dart';
 
 const uraAccessKey = '62f968e9-3534-4c1c-9250-44e04671037c';

@@ -1,10 +1,5 @@
-import 'package:carparkley/screens/login_register/login_page.dart';
-import 'package:carparkley/main.dart';
 import 'package:carparkley/screens/navigation_bar_screen.dart';
-import 'package:carparkley/screens/results_page.dart';
 import 'package:carparkley/screens/settings_screen.dart';
-import 'package:carparkley/control/GoogleMapsMgr.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places_hoc081098/flutter_google_places_hoc081098.dart';
@@ -12,7 +7,6 @@ import 'package:google_maps_webservice/places.dart';
 import '../components/constants.dart';
 import 'package:carparkley/control/CarparkMgr.dart';
 import 'destination_loading_screen.dart';
-import 'login_register/register_page.dart';
 import 'settings_screen.dart';
 
 class HomePage extends StatefulWidget {

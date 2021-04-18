@@ -1,17 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:carparkley/screens/destination_loading_screen.dart';
-import 'package:carparkley/screens/results_page.dart';
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import '../services/coordinate_converter.dart';
-import 'package:carparkley/control/MainControlMgr.dart';
 import 'GoogleMapsMgr.dart';
 
 const googleApiKey = 'AIzaSyDz74V86brNHy9fvgk6cvBv1X2g5BRAU7M';
 const uraAccessKey = '62f968e9-3534-4c1c-9250-44e04671037c';
 
 class CarparkMgr {
+  //This method uses Google Places API to give an output of all carparks near user's destination
   Future<dynamic> searchNearby(String keyword) async {
     String constant = 'car park near';
     var dio = Dio();
@@ -23,26 +20,10 @@ class CarparkMgr {
     };
     print('querying: $constant ' + keyword);
     var response = await dio.get(url, data: parameters);
-
-    // return response.data['results']
-    //     .map<String>((result) => result['geometry']['location'].toString())
-    //     .toList();
     return response.data['results'];
-    // final response = await http.get(
-    //   Uri.https(
-    //     'www.ura.gov.sg',
-    //     '/uraDataService/invokeUraDS',
-    //     {'service': 'Car_Park_Availability'},
-    //   ),
-    //   headers: {
-    //     'AccessKey': uraAccessKey,
-    //     'Token': await getDailyToken(),
-    //   },
-    // );
-    //
-    // final responseJson = jsonDecode(response.body);
   }
 
+  //This method is to get the daily token from URA, in order to use its API, because the token changes daily
   Future<String> getDailyToken() async {
     final response = await http.get(
         Uri.https('www.ura.gov.sg', '/uraDataService/insertNewToken.action'),
@@ -54,18 +35,10 @@ class CarparkMgr {
     return token;
   }
 
+  //this method compares the coordinates in the Output of Google's search results, with the URAdataset
+  //if coordinates match, display the carpark in results page
+  //multiple 'If's are used to provide more extensive checking, and because some of the data in URA dataset is not consistent
   Future<dynamic> locateCarparks(String destination, String vehicleType) async {
-    // var dio = Dio();
-    // var url = 'www.ura.gov.sg/uraDataService/invokeUraDS';
-    // var parameters = {
-    //   'AccessKey': uraAccessKey,
-    //   'Token': await getDailyToken(),
-    // };
-    // var response = await dio.get(url, data: parameters);
-    // return response.data['Result']
-    //     .map<String>((result) => result['geometries'].toString())
-    //     .toList();
-
     final response = await http.get(
       Uri.https(
         'www.ura.gov.sg',
@@ -80,18 +53,6 @@ class CarparkMgr {
 
     final responseJson = jsonDecode(response.body);
 
-    // return responseJson(response.body)['Result']
-    //     .map<String>((result) => result['geometries']['coordinates'].toString())
-    //     .toList();
-
-    // var dio = Dio();
-    // var url = 'www.ura.gov.sg/uraDataService/invokeUraDS';
-    // var parameters = {
-    //   'AccessKey': uraAccessKey,
-    //   'Token': await getDailyToken(),
-    // };
-    // var response = await dio.get(url, data: parameters);
-    // For testing the accessing of API
     print(responseJson);
     Map<String, List<String>> map = Map();
     map = {};
@@ -139,8 +100,6 @@ class CarparkMgr {
           if (roundedgoogleLat == roundedLat &&
               roundedgoogleLong == roundedLong) {
             print('match found!');
-            // String cpAddress = carparks[x]['formatted_address'];
-            // print(cpAddress);
             String cpNumber = responseJson['Result'][i]['carparkNo'];
             print("CP number is $cpNumber");
             String cpName = carparks[x]['name'];
@@ -149,6 +108,8 @@ class CarparkMgr {
             cpName = cpName + ' ' + cpNumber;
             String lotsAvail = responseJson['Result'][i]['lotsAvailable'];
             print('Lots Available: $lotsAvail');
+
+            //because some of the data in URA dataset is not consistent
             if (vehicleType == 'C' &&
                 (responseJson['Result'][i]['lotType'] == vehicleType ||
                     responseJson['Result'][i]['lotType'] == 'Car' ||
@@ -164,6 +125,8 @@ class CarparkMgr {
               map[cpName] = lotInfo;
               print('map is currently: $map');
             }
+
+            //because some of the data in URA dataset is not consistent
             if (vehicleType == 'M' &&
                 (responseJson['Result'][i]['lotType'] == vehicleType ||
                     responseJson['Result'][i]['lotType'] == 'Motorcycle' ||
@@ -179,6 +142,8 @@ class CarparkMgr {
               map[cpName] = lotInfo;
               print('map is currently: $map');
             }
+
+            //because some of the data in URA dataset is not consistent
             if (vehicleType == 'H' &&
                 (responseJson['Result'][i]['lotType'] == vehicleType ||
                     responseJson['Result'][i]['lotType'] == 'Heavy Vehicle' ||
@@ -197,16 +162,6 @@ class CarparkMgr {
           } else {
             print('LotType is not $vehicleType, rejected; not added to map');
           }
-          // var googlelat = carparks[x].toString().substring(6, 14);
-          // print('google lat is $googlelat');
-          // var googlelong = carparks[x].toString().substring(22, 31);
-          // print('google long is $googlelong');
-          // if (googlelat.compareTo(newLat) == 0 &&
-          //     googlelong.compareTo(newLong) == 0) {
-          //   print('match found!');
-          //   print('lat is $googlelat');
-          //   print('long is $googlelong');
-          // }
         }
       } catch (e) {
         print(e);
@@ -215,17 +170,5 @@ class CarparkMgr {
     }
     print('final map is $map');
     return map;
-    // Currently returns probably the entire Sg's carpark or some shit
-    // return response.data;
   }
-
-// void checkifSame(String destination) async {
-//   var uraLatlong = await carparkInformation();
-//   var carparklist = await FindCarpark().searchNearby(destination);
-//   var coord = uraLatlong;
-//   print('this is ura: $coord');
-//   for (String sName in carparklist) {
-//     print(sName);
-//   }
-// }
 }

@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'results_page.dart';
-import 'package:carparkley/main.dart';
-import 'results_page.dart';
 import 'dart:math';
-import 'dart:async';
 
 class DestLoadingPage extends StatefulWidget {
   DestLoadingPage({this.destination, this.vehicleType});

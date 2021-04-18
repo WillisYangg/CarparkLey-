@@ -1,11 +1,10 @@
-import 'settings_screen.dart';
+import 'package:carparkley/control/MessagingMgr.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:share/share.dart';
-import '../main.dart';
 import 'package:flutter/material.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:carparkley/services/favourites.dart';
+import 'package:share/share.dart';
 
 class CarparkInfo extends StatefulWidget {
   CarparkInfo({this.carparkInformation, this.cpName, this.cpInfo});
@@ -329,14 +328,16 @@ class _CarparkInfoState extends State<CarparkInfo> {
                 children: [
                   FlatButton(
                     color: Colors.deepPurpleAccent,
-                    onPressed: () {
-                      if (auth.currentUser!= null) {
+                    onPressed: () async {
+                      if (auth.currentUser != null) {
                         final String uid = auth.currentUser!.uid;
                         print(uid);
                         final db = FavouritesDatabase(uid);
-                        print("got to db");
+                        print("go to db");
                         db.updateUserData(cpInfo, cpName, carparkInformation);
-                      };
+                        _showMyDialog1();
+                      } else
+                        _showMyDialog2();
                     },
                     child: Container(
                       height: 30,
@@ -360,8 +361,7 @@ class _CarparkInfoState extends State<CarparkInfo> {
                   FlatButton(
                     color: Colors.deepPurpleAccent,
                     onPressed: () {
-                      Share.share(
-                          'Hey! Check out this $cpName and all its real time info below: \ncarparkInformation');
+                      MessagingMgr().shareCarpark(cpName);
                     },
                     child: Container(
                       height: 30,
@@ -410,6 +410,58 @@ class _CarparkInfoState extends State<CarparkInfo> {
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> _showMyDialog1() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Saving Sucessful'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('This carpark as been saved to favourites!'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.pop(context);
+                }),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _showMyDialog2() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Saving not successful'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Please log in to be able to save carpark as favourites!'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.pop(context);
+                }),
+          ],
+        );
+      },
     );
   }
 }

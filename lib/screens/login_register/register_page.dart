@@ -1,9 +1,7 @@
 import 'package:carparkley/control/RegistrationManager.dart';
 import 'package:carparkley/screens/login_register/login_page.dart';
-import 'package:carparkley/screens/login_register/verify_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../home_page.dart';
 import '../../components/rounded_input_field.dart';
 import '../../components/rounded_password_field.dart';
 

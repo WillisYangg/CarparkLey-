@@ -5,11 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import '../entity/carpark.dart';
 import 'home_page.dart';
-import 'destination_loading_screen.dart';
-import 'package:carparkley/main.dart';
-import 'package:carparkley/control/CarparkMgr.dart';
-import 'package:carparkley/services/coordinate_converter.dart';
-import 'package:carparkley/control/MainControlMgr.dart';
 
 class ResultsPage extends StatefulWidget {
   ResultsPage({this.carparks, this.lotType});
@@ -27,24 +22,9 @@ class _ResultsPageState extends State<ResultsPage> {
     var carparklist = widget.carparks;
     print('Carparklist: $carparklist');
     print("\n\n\n");
-    // getCarparkInfo();
-    // getCoordinates();
   }
-  //default distance
 
   String chosenSortType = 'Distance';
-
-  // void getCarparkInfo() async {
-  //   GetCarparkInfo().carparkInformation(destination);
-  // }
-
-  // void getCoordinates() async {
-  //   var coordinates = await CoordinateConverter()
-  //       .convert('28983.788791079794', '33554.5098132845');
-  //   print(coordinates);
-  // }
-
-// dummy results
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +37,8 @@ class _ResultsPageState extends State<ResultsPage> {
     print('cpInfoList is $cpInfoList');
     print(cpNameList.length);
 
+    //this checks how many results are obtained. If only 1, we need to make some changes to the code
+    //provides further checking to make sure if distance of carpark is >2km, it is not shown
     dynamic checkHowMany() {
       if (cpNameList.length == 1) {
         if (cpInfoList[0][3].substring(cpInfoList[0][3].length - 2, cpInfoList[0][3].length) == 'km') if (double

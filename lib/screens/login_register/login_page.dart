@@ -1,9 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import '../home_page.dart';
-import '../home_page.dart';
-import 'register_page.dart';
 import 'register_page.dart';
 import '../../components/rounded_input_field.dart';
 import '../../components/rounded_password_field.dart';

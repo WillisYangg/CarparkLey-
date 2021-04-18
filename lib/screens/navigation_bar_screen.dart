@@ -1,8 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:carparkley/screens/favourites_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'home_page.dart' as homepage;
-import 'login_register/login_page.dart';
 import 'login_register/login_page.dart';
 import 'login_register/sign_out_page.dart';
 import 'settings_screen.dart';
@@ -43,7 +42,7 @@ class Sidenav extends StatelessWidget {
             hoverColor: Colors.grey.shade400,
             onTap: () {
               Navigator.pushNamed(
-                  context, SignOutPage.id); // need to change to favourite
+                  context, FavouritesPage.id); // need to change to favourite
             },
             leading: Icon(
               Icons.star_border_outlined,

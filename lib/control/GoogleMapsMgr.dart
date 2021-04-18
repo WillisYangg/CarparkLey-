@@ -1,9 +1,9 @@
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'CarparkMgr.dart';
 
 class GoogleMapsMgr {
+  //Uses Google Distance Matrix API to calculate the distance from carpark to the destination of the user
+
   Future<dynamic> calculateDistance(String startPoint, String endPoint) async {
     var dio = Dio();
     var url = 'https://maps.googleapis.com/maps/api/distancematrix/json?';

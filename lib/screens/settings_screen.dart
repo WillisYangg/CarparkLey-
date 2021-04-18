@@ -1,8 +1,5 @@
-import 'package:carparkley/screens/home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'carpark_info_screen.dart';
-import 'home_page.dart';
 
 class SettingsScreen extends StatefulWidget {
   static String id = "settings_screen";
@@ -14,6 +11,9 @@ class SettingsScreen extends StatefulWidget {
 String vehicleValue = 'Car';
 String fontValue = '25';
 String language = 'English';
+
+//Only 'Set Vehicle Type' works, the other options: 'Font Size', 'Language' does not work as of now;
+//They are future implementations
 
 class _SettingsScreenState extends State<SettingsScreen> {
   @override
